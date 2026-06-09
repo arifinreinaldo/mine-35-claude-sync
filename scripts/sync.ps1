@@ -1,17 +1,19 @@
-# Dotfiles daily sync — sourced from PowerShell $PROFILE
-$_DOTFILES = "$env:USERPROFILE\dotfiles"
-$_STAMP    = "$_DOTFILES\.last-sync"
-$_TODAY    = (Get-Date).ToString("yyyy-MM-dd")
+# Dotfiles sync — sourced from PowerShell $PROFILE
+# Checks every 3 hours; fetches first, only pulls when changes exist
+$_DOTS  = "$env:USERPROFILE\dotfiles"
+$_STAMP = "$_DOTS\.last-sync"
+$_NOW   = [DateTimeOffset]::UtcNow.ToUnixTimeSeconds()
+$_LAST  = if (Test-Path $_STAMP) { [long](Get-Content $_STAMP -Raw).Trim() } else { 0 }
 
-if (-not (Test-Path $_STAMP) -or (Get-Content $_STAMP -Raw).Trim() -ne $_TODAY) {
-    Write-Host "[dotfiles] syncing..." -ForegroundColor Cyan
-    $result = git -C $_DOTFILES pull --quiet origin main 2>&1
-    if ($LASTEXITCODE -eq 0) {
-        $_TODAY | Set-Content $_STAMP
+if (($_NOW - $_LAST) -ge 10800) {
+    git -C $_DOTS fetch --quiet origin main 2>$null
+    $_CHANGES = git -C $_DOTS log HEAD..origin/main --oneline 2>$null
+    if ($_CHANGES) {
+        Write-Host "[dotfiles] update found, syncing..." -ForegroundColor Cyan
+        git -C $_DOTS pull --quiet origin main 2>$null
         Write-Host "[dotfiles] synced" -ForegroundColor Green
-    } else {
-        Write-Host "[dotfiles] sync failed (offline?)" -ForegroundColor Yellow
     }
+    $_NOW | Set-Content $_STAMP
 }
 
-Remove-Variable _DOTFILES, _STAMP, _TODAY -ErrorAction SilentlyContinue
+Remove-Variable _DOTS, _STAMP, _NOW, _LAST, _CHANGES -ErrorAction SilentlyContinue
