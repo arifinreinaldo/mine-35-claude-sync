@@ -1,0 +1,10 @@
+[user]
+	name = Reinaldo-GK
+	email = arifin.reinaldo@gmail.com
+[credential "helperselector"]
+	selected = <no helper>
+[core]
+	autocrlf = true
+	longpaths = true
+[safe]
+	directory = C:\\Users\\Reinaldo\\.xpipe\\storage
