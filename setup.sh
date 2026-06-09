@@ -44,5 +44,17 @@ link "$HOME/.claude/skills"        "$DOTFILES/claude/skills"
 # On Mac/Linux you may want to change it to: autocrlf=input
 link "$HOME/.gitconfig" "$DOTFILES/git/.gitconfig"
 
+# Shell hook — add daily sync to .zshrc or .bashrc
+HOOK=". \"$DOTFILES/scripts/sync.sh\""
+SHELL_RC="$HOME/.zshrc"
+[ ! -f "$SHELL_RC" ] && SHELL_RC="$HOME/.bashrc"
+
+if [ -f "$SHELL_RC" ] && grep -q "dotfiles/scripts/sync" "$SHELL_RC" 2>/dev/null; then
+    echo "SKIP (already hooked): $SHELL_RC"
+else
+    printf "\n# Dotfiles auto-sync\n%s\n" "$HOOK" >> "$SHELL_RC"
+    echo "HOOK: added sync to $SHELL_RC"
+fi
+
 echo ""
-echo "Done. All dotfiles linked."
+echo "Done. All dotfiles linked and shell hook installed."
