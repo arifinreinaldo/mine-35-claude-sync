@@ -1,5 +1,5 @@
 {
-  "model": "sonnet",
+  "model": "claude-fable-5",
   "enabledPlugins": {
     "frontend-design@claude-code-plugins": true,
     "code-review@claude-code-plugins": true,
@@ -25,6 +25,7 @@
       }
     }
   },
+  "effortLevel": "xhigh",
   "autoUpdatesChannel": "latest",
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
@@ -32,6 +33,5 @@
   "agentPushNotifEnabled": true,
   "feedbackSurveyState": {
     "lastShownTime": 1754639995541
-  },
-  "effortLevel": "xhigh"
+  }
 }
