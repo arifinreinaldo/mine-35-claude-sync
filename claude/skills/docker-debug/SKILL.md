@@ -5,6 +5,14 @@ description: Systematic Docker debugging — follow this order when a container 
 
 Use this skill when a Docker container or Docker Compose service is broken, not starting, or behaving unexpectedly.
 
+## Step 0 — Check for Docker MCP Toolkit
+
+If Docker Desktop is installed with MCP Toolkit enabled, Docker MCP tools may be available directly in this session. Check Docker Desktop → Settings → Beta features → Docker MCP Toolkit.
+
+If available, use Docker MCP tools for container inspection and management. If not, the CLI-based steps below cover everything.
+
+---
+
 ## Debugging order
 
 Work top-down. Stop at the layer that explains the problem.

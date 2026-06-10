@@ -5,6 +5,29 @@ description: Laravel feature scaffold — migration, model, controller, request,
 
 Use this skill when building a new Laravel feature from scratch.
 
+## Step 0 — Check for Laravel Boost
+
+Check if `laravel/boost` is in `composer.json`:
+
+```bash
+composer show laravel/boost 2>/dev/null
+```
+
+**If Boost is installed**, use its MCP tools throughout this skill:
+- `Application Info` — verify PHP & Laravel version and installed packages before scaffolding
+- `Database Schema` — read the actual schema before writing a migration (avoid redundant columns)
+- `Search Docs` — query latest Laravel docs for the feature you're building
+- `Last Error` / `Read Log Entries` — check for errors after each step
+- `Database Query` — verify data looks correct after seeding or migrating
+
+If Boost is not installed and the project is Laravel 12+, suggest:
+```bash
+composer require laravel/boost --dev
+php artisan boost:install
+```
+
+---
+
 ## Step 1 — Clarify before scaffolding
 
 Ask if not already clear:
@@ -19,6 +42,8 @@ Ask if not already clear:
 ```bash
 php artisan make:model Foo -m
 ```
+If Boost is available, read `Database Schema` first to understand existing tables and avoid redundant columns.
+
 Edit the migration first — define all columns with correct types, nullable/default, and indexes before touching the model.
 
 Model must define:
@@ -87,6 +112,7 @@ Use `RefreshDatabase` trait. Seed only what the test needs via factories.
 - [ ] Feature test covers happy path + at least one failure path
 - [ ] `php artisan test` passes
 - [ ] `php artisan route:list` shows the new route correctly
+- [ ] If Boost installed: `Last Error` MCP tool shows no new errors after running tests
 
 ## Common patterns
 

@@ -5,6 +5,27 @@ description: Flutter release checklist — version bump, signing, build, and dis
 
 Use this skill when the user is preparing a Flutter app release.
 
+## Step 0 — Check for Flutter MCP
+
+Check if the Dart MCP server is available (requires Dart 3.9+):
+
+```bash
+dart --version
+```
+
+**If Dart 3.9+ is available and MCP not yet added:**
+```bash
+claude mcp add --transport stdio dart -- dart mcp-server
+```
+
+**If Flutter MCP is active**, use its tools throughout this skill:
+- `Code analysis & fixes` — run before building to catch all errors and warnings
+- `Run tests` — execute the test suite and review results
+- `Package search` — verify any new dependencies on pub.dev before adding
+- `Code formatting` — ensure code is clean before release
+
+---
+
 ## Step 1 — Version bump
 
 In `pubspec.yaml`, bump `version: x.y.z+build`:
@@ -24,7 +45,19 @@ Confirm the correct flavor/environment is targeted:
 - Are API endpoints pointing to production, not staging?
 - Check `AndroidManifest.xml` and `Info.plist` for any debug flags or test configs left in.
 
-## Step 3 — Build
+## Step 3 — Analysis and tests
+
+If Flutter MCP is active, use `Code analysis & fixes` and `Run tests` tools.
+
+Otherwise, run manually:
+```bash
+flutter analyze
+flutter test
+```
+
+Zero errors and zero warnings required before proceeding.
+
+## Step 4 — Build
 
 ### Android APK / AAB
 ```bash
@@ -44,7 +77,7 @@ flutter build ipa --release --obfuscate --split-debug-info=build/debug-info/ios
 
 Verify in Xcode: Signing & Capabilities → correct provisioning profile and certificate for distribution, not development.
 
-## Step 4 — Pre-release checks
+## Step 5 — Pre-release checks
 
 - [ ] `flutter analyze` — zero errors, zero warnings
 - [ ] `flutter test` — all tests pass
@@ -55,7 +88,7 @@ Verify in Xcode: Signing & Capabilities → correct provisioning profile and cer
 - [ ] Permissions in `AndroidManifest.xml` / `Info.plist` match what the app actually uses
 - [ ] `--obfuscate` and `--split-debug-info` flags used (store the debug-info artifacts for crash symbolication)
 
-## Step 5 — Distribution
+## Step 6 — Distribution
 
 **Play Store:**
 1. Upload AAB to Google Play Console → Internal Testing first
