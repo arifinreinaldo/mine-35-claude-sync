@@ -65,6 +65,26 @@ To force a sync right now, use the Claude Code skill:
 
 ---
 
+## Windows: re-bootstrap after the gitconfig rename (one-time)
+
+**For Claude / anyone working on the Windows machine:** the OS-aware change renamed `git/.gitconfig` → `git/gitconfig.windows`. If this machine was bootstrapped **before** that change, `~/.gitconfig` is now a **dangling symlink** (it points at the deleted old path), so Git has no global `user.name` / `user.email`.
+
+Fix — run once, after the repo has pulled the change:
+
+```powershell
+python "$env:USERPROFILE\dotfiles\bootstrap.py"
+```
+
+This repoints `~/.gitconfig` → `git/gitconfig.windows` (`arifinreinaldo` / `arifin.reinaldo+windows@gmail.com`). Verify:
+
+```powershell
+git config user.email   # should print ...+windows@gmail.com
+```
+
+> The auto-sync hook only runs `git pull` — it **never re-creates symlinks**. Any structural change (a renamed or newly added synced file) needs `bootstrap.py` re-run on machines that were already set up.
+
+---
+
 ## Adding something new
 
 1. Drop the file into the repo under the right folder (`claude/`, `git/`, etc.)
