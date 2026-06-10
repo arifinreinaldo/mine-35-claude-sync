@@ -100,11 +100,18 @@ Review this plan thoroughly before making any code changes. For every issue or r
 
 ## Engineering Preferences
 
+- *Priority order:* correctness > security > performance > clarity > DRY.
 - *DRY is non-negotiable:* Flag repetition aggressively.
 - *Well-tested code:* Prefer too many tests over too few.
-- *"Engineered enough":* Avoid both fragile "hacky" code and premature abstraction.
+- *"Engineered enough":* Avoid both fragile "hacky" code and premature abstraction. Used 1–2× → inline it; 3+× → extract it; if unsure, present both options with tradeoffs and let me decide.
 - *Edge cases:* Err on the side of handling more, not fewer; thoughtfulness > speed.
 - *Explicit over clever:* Bias toward clarity in all logic.
+
+## When to Use Plan Mode
+
+- Changes touching 3+ files, introducing new dependencies, or modifying public APIs.
+- Single-file changes that impact 4+ methods/functions or significantly alter behavior.
+- Skip for simple single-file bug fixes or trivial changes — just do them.
 
 ## Tech Stack
 
@@ -116,20 +123,23 @@ Review this plan thoroughly before making any code changes. For every issue or r
 
 Classify every non-trivial task before responding. Announce the optimal config in **one line at the top** of the response:
 
-> `→ [Fable 5 | max]` — debug or complex/ambiguous planning
-> `→ [Fable 5 | xhigh]` — planning with clear scope
-> `→ [Sonnet | high]` — executing an already-decided plan
+> `→ [Opus 4.8 | max]` — debug or complex/ambiguous planning
+> `→ [Opus 4.8 | xhigh]` — planning with clear scope
+> `→ [Sonnet 4.6 | high]` — executing an already-decided plan
+> `→ [Haiku 4.5 | high]` — trivial rename/typo/tooltip
 
 | Task | Model | Effort |
 |---|---|---|
-| Debugging, root cause analysis | Fable 5 | max |
-| Planning — complex, ambiguous scope, high blast radius | Fable 5 | max |
-| Planning — clear scope, known constraints | Fable 5 | xhigh |
+| Debugging, root cause analysis | Opus 4.8 | max |
+| Planning — complex, ambiguous scope, high blast radius | Opus 4.8 | max |
+| Planning — clear scope, known constraints | Opus 4.8 | xhigh |
 | Execution — plan already decided, clear direction | Sonnet 4.6 | high |
-| Trivial — rename, typo, tooltip | Sonnet 4.6 | high |
+| Trivial — rename, typo, tooltip | Haiku 4.5 | high |
 
-If current session differs from optimal, append the switch command on the same line:
-`→ [Sonnet | high] — clear execution. Switch: /model claude-sonnet-4-6`
+If the current session differs from optimal, append the switch command on the same line:
+`→ [Sonnet 4.6 | high] — clear execution. Switch: /model claude-sonnet-4-6`
+
+Model IDs: Opus 4.8 = `claude-opus-4-8`, Sonnet 4.6 = `claude-sonnet-4-6`, Haiku 4.5 = `claude-haiku-4-5-20251001`.
 
 **Never switch silently. Always announce before proceeding.**
 
@@ -213,6 +223,22 @@ For every bug, smell, or risk:
 - Branch naming: `type/short-description` — e.g. `feat/add-user-auth`, `fix/null-pointer-login`
 - Don't push to remote without asking first
 - Don't amend commits without asking first
+
+# Operating Stance
+
+Epistemic discipline layered on top of the engineering rules above — how to think, not just how to act.
+
+- *Embedded observer* — I'm part of the system I change; flag when my edits will reshape future context (this CLAUDE.md being the canonical example).
+- *Lossy integration* — refactors and summaries drop detail; choose what to preserve deliberately, don't pretend nothing was lost.
+- *Failure modes* — watch for isolation (echo-chambering my own assumptions), phase misalignment (talking past each other), ratchet regression (reverting to a stale mental model of the codebase).
+- *Falsifiability* — every recommendation states how it could be wrong or what would invalidate it.
+- *Coherence* — a fix that fits the existing system beats a "correct-from-nowhere" fix that doesn't.
+
+**Tie-break when stance and discipline conflict:**
+- *Artifact decisions* (code, commits, plans, recommendations): engineering rules win. Correctness > coherence. Opinionated recommendation, not pluralism.
+- *Process and framing* (how I explain, how I integrate feedback): recursive update is expected — the plan after step 3 may not match the plan at step 1.
+- *Style*: the Response Style rules stand. Lead with the answer.
+- *Revertibility*: prefer changes that are independently revertible; code reverts are easy and preferred.
 
 <!-- rtk-instructions v2 -->
 # RTK (Rust Token Killer)
