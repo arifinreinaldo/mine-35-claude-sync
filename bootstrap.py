@@ -24,17 +24,33 @@ print(f"[bootstrap] OS: {system}")
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
-def sh(cmd, **kw):
-    subprocess.run(cmd, shell=True, check=True, **kw)
+# git must work even when ~/.gitconfig is a dangling symlink — that's one of
+# the things bootstrap repairs. Ignore the global config for our own git calls.
+GIT_ENV = {**os.environ, "GIT_CONFIG_GLOBAL": os.devnull}
+
+def git(cmd):
+    subprocess.run(cmd, shell=True, check=True, env=GIT_ENV)
 
 def ps(cmd):
     subprocess.run(["powershell", "-NoProfile", "-Command", cmd], check=True)
 
+def _remove_link(p: Path):
+    try:
+        p.unlink()
+    except (IsADirectoryError, PermissionError):
+        p.rmdir()  # Windows directory symlink needs rmdir
+
 def symlink(src: Path, dst: Path):
     if dst.is_symlink():
-        print(f"  SKIP   {dst}")
-        return
-    if dst.exists():
+        try:
+            if dst.resolve(strict=True) == src.resolve():
+                print(f"  SKIP   {dst}")
+                return
+        except OSError:
+            pass  # dangling — target was deleted/renamed
+        print(f"  REPAIR {dst} (stale link)")
+        _remove_link(dst)
+    elif dst.exists():
         bak = dst.with_suffix(dst.suffix + ".bak")
         print(f"  BACKUP {dst} → {bak}")
         dst.rename(bak)
@@ -59,10 +75,10 @@ def add_hook(rc: Path, marker: str, hook: str):
 
 if not DOTS.exists():
     print(f"[bootstrap] cloning repo...")
-    sh(f'git clone "{REPO}" "{DOTS}"')
+    git(f'git clone "{REPO}" "{DOTS}"')
 else:
     print(f"[bootstrap] repo exists, pulling latest...")
-    sh(f'git -C "{DOTS}" pull --quiet origin main')
+    git(f'git -C "{DOTS}" pull --quiet origin main')
 
 # ── Symlinks ──────────────────────────────────────────────────────────────────
 
