@@ -30,8 +30,12 @@ New-Link "$env:USERPROFILE\.claude\CLAUDE.md"     "$DOTFILES\claude\CLAUDE.md"
 New-Link "$env:USERPROFILE\.claude\settings.json" "$DOTFILES\claude\settings.json"
 New-Link "$env:USERPROFILE\.claude\skills"        "$DOTFILES\claude\skills"
 
-# Git
-New-Link "$env:USERPROFILE\.gitconfig"            "$DOTFILES\git\.gitconfig"
+# Git — gitconfig is OS-specific; use the windows variant on Windows
+if (Test-Path "$DOTFILES\git\gitconfig.windows") {
+    New-Link "$env:USERPROFILE\.gitconfig"            "$DOTFILES\git\gitconfig.windows"
+} else {
+    Write-Host "SKIP: no git\gitconfig.windows in repo"
+}
 
 # Shell hook — add daily sync to PowerShell profile
 $HOOK = ". `"$DOTFILES\scripts\sync.ps1`""

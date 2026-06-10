@@ -73,7 +73,13 @@ CLAUDE.mkdir(exist_ok=True)
 symlink(DOTS / "claude" / "CLAUDE.md",     CLAUDE / "CLAUDE.md")
 symlink(DOTS / "claude" / "settings.json", CLAUDE / "settings.json")
 symlink(DOTS / "claude" / "skills",        CLAUDE / "skills")
-symlink(DOTS / "git"    / ".gitconfig",    HOME   / ".gitconfig")
+
+# gitconfig is OS-specific — pick the matching variant, skip if absent
+gitconfig = DOTS / "git" / ("gitconfig.windows" if IS_WIN else "gitconfig.unix")
+if gitconfig.exists():
+    symlink(gitconfig, HOME / ".gitconfig")
+else:
+    print(f"  SKIP   no gitconfig for this OS ({gitconfig.name} not in repo)")
 
 # ── Shell hook ────────────────────────────────────────────────────────────────
 

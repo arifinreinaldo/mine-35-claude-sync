@@ -1,0 +1,12 @@
+[user]
+	name = arifinreinaldo
+	email = arifin.reinaldo+gh@gmail.com
+[core]
+	excludesfile = ~/.gitignore_global
+	autocrlf = input
+[difftool "sourcetree"]
+	cmd = opendiff "$LOCAL" "$REMOTE"
+	path =
+[mergetool "sourcetree"]
+	cmd = $HOME/Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh "$LOCAL" "$REMOTE" -ancestor "$BASE" -merge "$MERGED"
+	trustExitCode = true

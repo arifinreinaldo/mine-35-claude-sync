@@ -47,7 +47,7 @@ The bootstrap script will:
 | `claude/CLAUDE.md` | `~/.claude/CLAUDE.md` |
 | `claude/settings.json` | `~/.claude/settings.json` |
 | `claude/skills/` | `~/.claude/skills/` |
-| `git/.gitconfig` | `~/.gitconfig` |
+| `git/gitconfig.windows` *(Windows)* · `git/gitconfig.unix` *(macOS/Linux)* | `~/.gitconfig` |
 
 ---
 
@@ -75,6 +75,6 @@ To force a sync right now, use the Claude Code skill:
 
 ## Notes
 
-- `core.autocrlf = true` in `.gitconfig` is Windows-specific. On Mac/Linux, change to `autocrlf = input` after setup if needed.
+- `.gitconfig` is **OS-specific**: bootstrap symlinks `git/gitconfig.windows` on Windows and `git/gitconfig.unix` on macOS/Linux, and **skips it entirely if no variant exists** for the current OS. Keep per-OS settings (line endings, GUI tool paths, credential helpers, identity) in the matching variant — never share one `.gitconfig` across OSes.
 - `~/.claude/settings.local.json` is intentionally excluded — it holds machine-specific permissions.
 - `~/.claude/memory/` is excluded — it's path-encoded per machine.

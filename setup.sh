@@ -39,10 +39,12 @@ link "$HOME/.claude/CLAUDE.md"     "$DOTFILES/claude/CLAUDE.md"
 link "$HOME/.claude/settings.json" "$DOTFILES/claude/settings.json"
 link "$HOME/.claude/skills"        "$DOTFILES/claude/skills"
 
-# Git
-# NOTE: autocrlf=true in .gitconfig is Windows-specific.
-# On Mac/Linux you may want to change it to: autocrlf=input
-link "$HOME/.gitconfig" "$DOTFILES/git/.gitconfig"
+# Git — gitconfig is OS-specific; use the unix variant on macOS/Linux
+if [ -f "$DOTFILES/git/gitconfig.unix" ]; then
+    link "$HOME/.gitconfig" "$DOTFILES/git/gitconfig.unix"
+else
+    echo "SKIP: no git/gitconfig.unix in repo"
+fi
 
 # Shell hook — add daily sync to .zshrc or .bashrc
 HOOK=". \"$DOTFILES/scripts/sync.sh\""
