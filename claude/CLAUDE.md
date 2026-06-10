@@ -112,6 +112,27 @@ Review this plan thoroughly before making any code changes. For every issue or r
 - Secondary/Infra: Docker, AWS, Azure, Supabase, JavaScript/TypeScript, iOS/Swift
 - Scripting: Python for tooling/analysis
 
+## Model & Effort Routing
+
+Classify every non-trivial task before responding. Announce the optimal config in **one line at the top** of the response:
+
+> `→ [Fable 5 | max]` — debug or complex/ambiguous planning
+> `→ [Fable 5 | xhigh]` — planning with clear scope
+> `→ [Sonnet | high]` — executing an already-decided plan
+
+| Task | Model | Effort |
+|---|---|---|
+| Debugging, root cause analysis | Fable 5 | max |
+| Planning — complex, ambiguous scope, high blast radius | Fable 5 | max |
+| Planning — clear scope, known constraints | Fable 5 | xhigh |
+| Execution — plan already decided, clear direction | Sonnet 4.6 | high |
+| Trivial — rename, typo, tooltip | Sonnet 4.6 | high |
+
+If current session differs from optimal, append the switch command on the same line:
+`→ [Sonnet | high] — clear execution. Switch: /model claude-sonnet-4-6`
+
+**Never switch silently. Always announce before proceeding.**
+
 ## Response Style
 
 - Be concise. Lead with the action or answer, not preamble.
