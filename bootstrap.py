@@ -75,7 +75,8 @@ symlink(DOTS / "claude" / "settings.json", CLAUDE / "settings.json")
 symlink(DOTS / "claude" / "skills",        CLAUDE / "skills")
 
 # gitconfig is OS-specific — pick the matching variant, skip if absent
-gitconfig = DOTS / "git" / ("gitconfig.windows" if IS_WIN else "gitconfig.unix")
+_gitcfg_name = "gitconfig.windows" if IS_WIN else "gitconfig.macos" if IS_MAC else "gitconfig.linux"
+gitconfig = DOTS / "git" / _gitcfg_name
 if gitconfig.exists():
     symlink(gitconfig, HOME / ".gitconfig")
 else:

@@ -47,7 +47,7 @@ The bootstrap script will:
 | `claude/CLAUDE.md` | `~/.claude/CLAUDE.md` |
 | `claude/settings.json` | `~/.claude/settings.json` |
 | `claude/skills/` | `~/.claude/skills/` |
-| `git/gitconfig.windows` *(Windows)* · `git/gitconfig.unix` *(macOS/Linux)* | `~/.gitconfig` |
+| `git/gitconfig.windows` · `git/gitconfig.macos` · `git/gitconfig.linux`† | `~/.gitconfig` |
 
 ---
 
@@ -75,6 +75,7 @@ To force a sync right now, use the Claude Code skill:
 
 ## Notes
 
-- `.gitconfig` is **OS-specific**: bootstrap symlinks `git/gitconfig.windows` on Windows and `git/gitconfig.unix` on macOS/Linux, and **skips it entirely if no variant exists** for the current OS. Keep per-OS settings (line endings, GUI tool paths, credential helpers, identity) in the matching variant — never share one `.gitconfig` across OSes.
+- `.gitconfig` is **OS-specific**: bootstrap symlinks `git/gitconfig.windows` (Windows), `git/gitconfig.macos` (macOS), or `git/gitconfig.linux` (Linux), and **skips it entirely if no variant exists** for the current OS. † `gitconfig.linux` isn't committed yet — Linux machines skip the symlink (keeping their own `~/.gitconfig`) until you add one.
+- Git identity is shared (`name = arifinreinaldo`) but **email is OS-tagged** — `arifin.reinaldo+windows@gmail.com`, `arifin.reinaldo+macos@gmail.com`, etc. — so you can tell which machine authored a commit. Keep other per-OS settings (line endings, GUI tool paths, credential helpers) in the matching variant; never share one `.gitconfig` across OSes.
 - `~/.claude/settings.local.json` is intentionally excluded — it holds machine-specific permissions.
 - `~/.claude/memory/` is excluded — it's path-encoded per machine.

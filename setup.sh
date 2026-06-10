@@ -39,11 +39,15 @@ link "$HOME/.claude/CLAUDE.md"     "$DOTFILES/claude/CLAUDE.md"
 link "$HOME/.claude/settings.json" "$DOTFILES/claude/settings.json"
 link "$HOME/.claude/skills"        "$DOTFILES/claude/skills"
 
-# Git — gitconfig is OS-specific; use the unix variant on macOS/Linux
-if [ -f "$DOTFILES/git/gitconfig.unix" ]; then
-    link "$HOME/.gitconfig" "$DOTFILES/git/gitconfig.unix"
+# Git — gitconfig is OS-specific; pick macos/linux by uname
+case "$(uname -s)" in
+    Darwin) GITCFG="gitconfig.macos" ;;
+    *)      GITCFG="gitconfig.linux" ;;
+esac
+if [ -f "$DOTFILES/git/$GITCFG" ]; then
+    link "$HOME/.gitconfig" "$DOTFILES/git/$GITCFG"
 else
-    echo "SKIP: no git/gitconfig.unix in repo"
+    echo "SKIP: no git/$GITCFG in repo"
 fi
 
 # Shell hook — add daily sync to .zshrc or .bashrc
