@@ -119,6 +119,7 @@ Review this plan thoroughly before making any code changes. For every issue or r
 ## Tech Stack
 
 - Primary: Flutter/Dart, Kotlin, Laravel (PHP), SQL, SQLite
+- Secondary/Infra: Docker, AWS, Azure, Supabase, JavaScript/TypeScript, iOS/Swift
 - Scripting: Python for tooling/analysis
 
 ## Response Style
@@ -167,6 +168,13 @@ When explaining concepts, code behavior, or debugging findings:
 #### 4. Performance
 - Audit N+1 queries, database patterns, and memory usage.
 - Look for caching opportunities and high-complexity code paths.
+
+#### 5. Mobile
+- Flutter: check bundle size impact, unnecessary rebuilds, widget tree depth.
+- State management: verify pattern consistency (Riverpod/Bloc/Provider — don't mix).
+- Platform divergence: flag any Android/iOS behavioral differences in the changed code.
+- Native plugins: check compatibility, null safety, and platform channel correctness.
+- Asset/image handling: check resolution variants, caching, and memory footprint.
 
 ## Issue Reporting Format
 
