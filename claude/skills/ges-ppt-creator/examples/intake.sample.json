@@ -1,0 +1,125 @@
+{
+  "company": {
+    "name": "PT Sinar Manufaktur Nusantara",
+    "industry": "Discrete manufacturing",
+    "size": "~300 employees, 2 plants",
+    "current_system": "Spreadsheets + standalone accounting package",
+    "date": "July 2026"
+  },
+  "understanding": {
+    "profile": "PT Sinar Manufaktur Nusantara requires an integrated ERP system to streamline production, procurement, inventory, and finance, improving control and visibility across its plants.",
+    "current_system": "Currently running on spreadsheets and a standalone accounting package, with no integration between production and finance.",
+    "challenges": [
+      {
+        "category": "Production Challenges",
+        "items": [
+          "Work orders and shop-floor progress tracked manually.",
+          "No real-time bill-of-materials or material availability check.",
+          "Production scheduling maintained in Excel, prone to conflicts."
+        ]
+      },
+      {
+        "category": "Procurement Challenges",
+        "items": [
+          "Purchase orders created and approved manually.",
+          "No vendor price comparison; quotes compared in spreadsheets.",
+          "Frequent raw-material stockouts disrupting production."
+        ]
+      },
+      {
+        "category": "Reporting Challenges",
+        "items": [
+          "Monthly close is manual and slow.",
+          "No real-time inventory valuation across plants.",
+          "Limited cost visibility per work order."
+        ]
+      }
+    ]
+  },
+  "process": {
+    "stages": [
+      {
+        "title": "1. Procurement",
+        "steps": [
+          "Material Requisition",
+          "RFQ → responses",
+          "Price Comparison",
+          "Purchase Order",
+          "Multi-level approval",
+          "Goods Receipt"
+        ]
+      },
+      {
+        "title": "2. Production",
+        "steps": [
+          "Work Order from BOM",
+          "Material issue to shop floor",
+          "Production reporting",
+          "Finished-goods receipt"
+        ]
+      },
+      {
+        "title": "3. Inventory",
+        "steps": [
+          "Multi-warehouse stock",
+          "Raw / WIP / finished segregation",
+          "Transfer & adjustment",
+          "Real-time valuation"
+        ]
+      },
+      {
+        "title": "4. Accounting",
+        "steps": [
+          "Supplier Invoice → AP",
+          "Costing per work order",
+          "Payment (multi-currency)",
+          "Financial reporting"
+        ]
+      }
+    ],
+    "loop_note": "Closed loop: production consumption and finished-goods output update inventory and cost in real time.",
+    "reporting_note": "Reporting & Dashboards across all stages — production output · procurement performance · inventory valuation · cost per work order · financial close"
+  },
+  "benefits": [
+    "Increased throughput through production & procurement automation",
+    "Real-time inventory and BOM accuracy across plants",
+    "Faster PO and work-order approval cycles",
+    "Tighter raw-material and WIP control",
+    "Accurate cost-per-work-order visibility",
+    "Reduced stockouts and expediting costs",
+    "Faster monthly close and reporting",
+    "Better decisions via real-time dashboards"
+  ],
+  "methodology": {
+    "start_month": "August",
+    "months": 6,
+    "stages": ["Impact Analysis", "Functional Design", "Customization", "Implementation", "Training", "Go-live"]
+  },
+  "scope": [
+    {"module": "Master Data", "solution": "Items, BOMs, Vendors, Customers", "type": "Standard", "scope_function": "Item master, bill of materials, counterparties."},
+    {"module": "Procurement", "solution": "Purchase Order & Approval", "type": "Standard, Enhancement", "scope_function": "PR, RFQ, PO, multi-level approval, vendor price comparison."},
+    {"module": "Production", "solution": "Work Orders & Costing", "type": "Enhancement", "scope_function": "Work orders from BOM, material issue, production reporting, work-order costing."},
+    {"module": "Inventory", "solution": "Multi-warehouse Stock", "type": "Standard", "scope_function": "Raw / WIP / finished stock, transfers, adjustments, real-time valuation."},
+    {"module": "Accounting", "solution": "AR / AP & Costing", "type": "Standard", "scope_function": "Invoicing, payments, multi-currency, cost accounting."},
+    {"module": "Reporting", "solution": "Dashboards", "type": "Standard, Enhancement", "scope_function": "Production output, procurement, inventory valuation, cost per work order."}
+  ],
+  "commercials": {
+    "currency": "IDR",
+    "line_items": [
+      {"item": "1C:Drive named-user licenses (20 users)", "qty": 20, "unit_price": 4500000},
+      {"item": "Implementation services (Procurement, Production, Inventory, Finance)", "qty": 1, "unit_price": 420000000},
+      {"item": "Custom enhancements (BOM, work-order costing)", "qty": 1, "unit_price": 180000000},
+      {"item": "Annual support & maintenance (Year 1)", "qty": 1, "unit_price": 80000000}
+    ],
+    "terms": "50% on signing, 40% on UAT, 10% on go-live"
+  },
+  "assumptions": [
+    "Pricing assumes one production environment plus one test environment, hosted by the client.",
+    "Master data (items, BOMs, vendors, customers) is provided by the client in agreed templates before migration.",
+    "Up to 2 plants are in scope; additional sites are a change request.",
+    "Custom enhancements are limited to BOM and work-order costing as scoped; further customization is quoted separately.",
+    "The client provides timely access to subject-matter experts and UAT sign-off within agreed windows.",
+    "Training covers up to 5 core users per plant, train-the-trainer thereafter.",
+    "Licenses are billed to the client; all prices exclude VAT."
+  ]
+}
