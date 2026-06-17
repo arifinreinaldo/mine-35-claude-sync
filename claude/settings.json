@@ -2,7 +2,7 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "claude-opus-4-8",
+  "model": "opus[1m]",
   "hooks": {
     "PreToolUse": [
       {
@@ -52,8 +52,8 @@
   "effortLevel": "xhigh",
   "autoUpdatesChannel": "latest",
   "skipDangerousModePermissionPrompt": true,
-  "skipAutoPermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
   "theme": "dark-ansi",
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true
 }
