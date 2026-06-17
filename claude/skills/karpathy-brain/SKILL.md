@@ -25,6 +25,7 @@ Based on Karpathy's LLM-wiki pattern (raw source → wiki → schema; ingest / q
 Run when a project has no `llm_wiki/` yet. Scaffold + a shallow seed pass — do NOT deep-crawl every file.
 
 0. **Preflight — never clobber an existing wiki.** If `llm_wiki/` already exists and is non-empty — or the repo already has a similar knowledge base (`docs/wiki/`, `.wiki/`, or a `CLAUDE.md` that already routes through one) — STOP scaffolding. Report what's there and switch to the **update**/**lint** op against it instead. Migrating a different format is opt-in only — ask first. Never overwrite existing wiki files.
+0b. **Warrant check — is a wiki even worth it?** Rough heuristic over `git ls-files` filtered to source files: if the repo is **< ~20 code files or < ~2,000 LOC**, it likely fits in a single read — a wiki you must keep in sync is premature. Say so and ask before proceeding (prefer just reading `src/`). This pattern pays off on large, long-lived codebases, not small ones.
 1. Confirm it's a git repo (offer `git init` if not — the wiki must be versioned with the code).
 2. Detect the stack from manifests present: `pubspec.yaml`, `composer.json`, `package.json`, `build.gradle(.kts)`, `Cargo.toml`, `go.mod`, `*.sln`, `Gemfile`, `requirements.txt`/`pyproject.toml`.
 3. Create from this skill's `templates/` **only the files that don't already exist** in `llm_wiki/`, replacing placeholders (`{{PROJECT_NAME}}`, `{{DATE}}`, `{{STACK}}`, `{{ENTRYPOINTS}}`). `{{DATE}}` = `date +%F`. Never overwrite a file that's already there — init is safe to re-run.
@@ -33,7 +34,7 @@ Run when a project has no `llm_wiki/` yet. Scaffold + a shallow seed pass — do
    - `code_map.md` — one row per top-level dir: path → purpose → page (`TBD` until a room exists).
    - `map.md` — route the four intents to whatever pages exist; mark `areas/*` as "expand on demand."
 5. **Wire search:** take `templates/project-CLAUDE.md`. If the project has a `./CLAUDE.md`, append it as a guarded `## llm_wiki (memory palace)` section (skip if already present); else create `./CLAUDE.md` from it.
-6. Commit to the **project** repo: `docs: scaffold llm_wiki memory palace`. Ask before push.
+6. Write `llm_wiki/.synced-to` = current `git rev-parse HEAD` + date (the staleness marker — see "Staleness tracking"). Then commit to the **project** repo: `docs: scaffold llm_wiki memory palace`. Ask before push.
 
 Deep `areas/*` pages are created on demand — when a task or an `update` first needs that room.
 
@@ -48,18 +49,27 @@ The recurring value. Run after finishing any change in a repo that has `llm_wiki
 4. Update `map.md`/`index.md` only if intents or structure changed.
 5. Append one line to `CHANGELOG.md`: `## <date> — <summary>` + pages touched.
 6. Quick `lint` on the touched pages (next section), scoped to what you changed.
-7. Commit to the project repo: `docs: sync llm_wiki for <change>` (Conventional Commits). Ask before push.
+7. Rewrite `llm_wiki/.synced-to` = current `HEAD` + date. Then commit to the project repo: `docs: sync llm_wiki for <change>` (Conventional Commits). Ask before push.
 
 ## Operation: lint (health check)
 
 On request, or scoped after `update`:
 
+- **Drift (most important):** `git diff --name-only "$(head -1 llm_wiki/.synced-to)"..HEAD -- . ':(exclude)llm_wiki'` — code changed since the last sync means the wiki is behind. Report the lagging files; that's the `update` queue.
 - **Orphans:** pages not reachable from `map.md`/`index.md`.
 - **Stale paths:** `code_map.md` rows pointing at files absent from `git ls-files`.
 - **Coverage gaps:** top-level dirs with no `code_map.md` row.
 - **Contradictions / broken `[[links]]`** across pages.
 
 Report concisely; fix the cheap ones, flag the rest.
+
+## Staleness tracking
+
+The wiki is a cache of the code; its value collapses the moment it drifts. `llm_wiki/.synced-to` records the commit SHA the wiki was last reconciled to.
+
+- `init` and `update` write the current `HEAD` into it.
+- `lint`'s **drift** check diffs `.synced-to..HEAD` (excluding `llm_wiki/`) — non-empty means the wiki is behind, and names exactly which code files to reconcile.
+- **Optional, opt-in:** offer to install a `post-commit` git hook that runs the drift check and reminds when a commit touched code but not `llm_wiki/`. Never install it without asking — it's a per-repo side effect.
 
 ## Anti-patterns
 
