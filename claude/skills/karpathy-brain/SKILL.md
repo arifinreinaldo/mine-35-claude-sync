@@ -24,9 +24,10 @@ Based on Karpathy's LLM-wiki pattern (raw source → wiki → schema; ingest / q
 
 Run when a project has no `llm_wiki/` yet. Scaffold + a shallow seed pass — do NOT deep-crawl every file.
 
+0. **Preflight — never clobber an existing wiki.** If `llm_wiki/` already exists and is non-empty — or the repo already has a similar knowledge base (`docs/wiki/`, `.wiki/`, or a `CLAUDE.md` that already routes through one) — STOP scaffolding. Report what's there and switch to the **update**/**lint** op against it instead. Migrating a different format is opt-in only — ask first. Never overwrite existing wiki files.
 1. Confirm it's a git repo (offer `git init` if not — the wiki must be versioned with the code).
 2. Detect the stack from manifests present: `pubspec.yaml`, `composer.json`, `package.json`, `build.gradle(.kts)`, `Cargo.toml`, `go.mod`, `*.sln`, `Gemfile`, `requirements.txt`/`pyproject.toml`.
-3. Copy every file from this skill's `templates/` into the project's `llm_wiki/`, replacing placeholders (`{{PROJECT_NAME}}`, `{{DATE}}`, `{{STACK}}`, `{{ENTRYPOINTS}}`). `{{DATE}}` = `date +%F`.
+3. Create from this skill's `templates/` **only the files that don't already exist** in `llm_wiki/`, replacing placeholders (`{{PROJECT_NAME}}`, `{{DATE}}`, `{{STACK}}`, `{{ENTRYPOINTS}}`). `{{DATE}}` = `date +%F`. Never overwrite a file that's already there — init is safe to re-run.
 4. **Seed pass (read-only, shallow):** manifests, `README*`, the top-level directory listing, and entry points (`main.dart`, `lib/main.*`, `routes/*.php`/`index.php`, `*Application.kt`/`MainActivity.kt`, `main.go`, `src/index.*`). From that, fill:
    - `architecture.md` — system shape, entry points, primary data flow (one pass, no deep dive).
    - `code_map.md` — one row per top-level dir: path → purpose → page (`TBD` until a room exists).
