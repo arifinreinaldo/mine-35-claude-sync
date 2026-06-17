@@ -60,6 +60,16 @@ If any are unclear on non-trivial work → flag it explicitly and ask or defer.
 
 ---
 
+### GOAL-DRIVEN EXECUTION (Karpathy)
+
+Turn imperatives into checks, then loop until the check passes — don't declare done on assertion alone.
+
+- *Restate the goal as a verifiable success criterion* before executing: the command, test, or observation that proves "done."
+- *Self-verify:* run that check; iterate until it passes. Evidence before claims.
+- *Surgical:* touch only what the goal requires — no orthogonal or opportunistic edits bundled into the same change.
+
+---
+
 ### COMMIT DECISION
 
 - **Full Coherence** → Ship complete solution
