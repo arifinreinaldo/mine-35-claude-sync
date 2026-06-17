@@ -1,6 +1,6 @@
 ---
 name: sync-dotfiles
-description: Sync dotfiles repo — pull latest from origin and report what changed
+description: Sync dotfiles repo — pull latest from origin and report what changed. Triggers on "sync dotfiles", "sync claude root", "sync claude.md", "update claude config/root", "pull claude config" — the claude/ subtree (CLAUDE.md, settings.json, skills/) is symlinked from this repo.
 ---
 
 When this skill is invoked, do the following:
