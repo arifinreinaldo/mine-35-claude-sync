@@ -45,6 +45,24 @@ Trust user intent on small, low-impact changes. Do not over-process obvious requ
 
 ---
 
+### RESEARCH GATE (Before Planning a Non-Trivial Feature — Any Stack)
+
+Run when researching *how to build or understand* a feature, before the Verification Gate. **Stack-agnostic** — the steps are identical for Laravel, Flutter, Kotlin, SQL, infra; only the *grounding sources* change. Skip for trivial changes.
+
+1. **Discover perspectives** — the 4 Invariables **+** lenses this feature demands (concurrency, migration/back-compat, API contract, failure modes, security, …). Derive from the feature, not a fixed list.
+2. **Question per perspective** — what each lens must answer before code is safe.
+3. **Answer by grounding** — resolve every question against a *source*, whichever the stack provides:
+   - **Code** — the repo (`file:line`).
+   - **Framework/library docs** — via Context7 (resolve the lib — Laravel, Flutter/Dart, Kotlin, … — then pull its docs).
+   - **Web** — patterns/precedents not in either.
+   No ungrounded answers; if one can't be grounded, mark it an **open risk**.
+4. **Synthesize → cited brief** — a plan where each decision names its source. Feeds the Verification Gate.
+5. **Map unknown-unknowns** — list surfaced constraints/edge-cases; loop 1–4 until a pass adds nothing new.
+
+*Output contract: every claim traces to code, a doc, or a flagged unknown — never bare assertion. Mechanizes "Never write code you cannot trace invariants for."*
+
+---
+
 ### VERIFICATION GATE (Before Writing Code)
 
 You must be able to answer these before shipping:
@@ -233,6 +251,11 @@ For every bug, smell, or risk:
 - Branch naming: `type/short-description` — e.g. `feat/add-user-auth`, `fix/null-pointer-login`
 - Don't push to remote without asking first
 - Don't amend commits without asking first
+
+# Skill Activation Guards
+
+- **`domain-modeling` / `grill-with-docs`** (mattpocock subset) — these build a `CONTEXT.md` glossary + `docs/adr/`. Do **not** auto-activate them in a repo that already has an established domain-knowledge layer (an `llm_wiki/`, a docs wiki, or an existing `CONTEXT.md`/glossary) **or** a "don't proactively create docs" rule. In such a repo that existing layer is the single source of truth — read it for vocabulary, and never spin up a parallel `CONTEXT.md`/`docs/adr/` (DRY). They stay valid for greenfield repos with no knowledge layer, and via explicit `/grill-with-docs`. The `grilling` interview loop (no docs) is always fine.
+  - Concrete: `flutter_rad_pvmi` has `llm_wiki/` — defer to it there; do not generate `CONTEXT.md`/ADRs in that repo.
 
 # Operating Stance
 
