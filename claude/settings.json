@@ -27,6 +27,18 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/dotfiles/scripts/auto-commit-skills.sh",
+            "timeout": 60,
+            "statusMessage": "Syncing skills"
+          }
+        ]
+      }
     ]
   },
   "enabledPlugins": {
@@ -46,7 +58,9 @@
     "code-review@claude-code-plugins": true,
     "code-review@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
-    "trading-ideas@claude-equity-research-marketplace": true
+    "trading-ideas@claude-equity-research-marketplace": true,
+    "ponytail@ponytail": true,
+    "gopls-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-code-skills": {
@@ -59,6 +73,12 @@
       "source": {
         "source": "github",
         "repo": "quant-sentiment-ai/claude-equity-research"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
       }
     }
   },
