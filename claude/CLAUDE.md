@@ -87,6 +87,8 @@ Model IDs: `claude-opus-4-8`, `claude-sonnet-5`, `claude-haiku-4-5-20251001`.
 - `/my-review` — staged interactive review: architecture → quality → testing → performance → mobile.
 - `/feynman` — step-by-step plain-language breakdown; triggers on "feynman this" or explicit request.
 
+**Skill self-improvement (always on):** when executing any personal skill (`~/dotfiles/claude/skills/`) and a blocker interrupts it — a failing step, missing precondition, or wrong/ambiguous instruction — apply the Self-Improvement Protocol without being asked: document it under the skill's **Known Blockers**, fix and verify (evidence, not assertion), add a dated **Changelog** line, and rewrite the affected instruction so it can't recur. If the skill lacks those sections, add them. Memorialize only reproducible, structural blockers — not one-off transient failures. Risky or behavior-changing rewrites: show me first instead of self-editing. Plugin skills aren't ours to edit — report their blockers to me instead.
+
 ## Git Conventions
 
 - Conventional Commits: `type: short description` — types: `feat` `fix` `chore` `refactor` `docs` `test` `perf` `build`; lowercase, imperative, concise.
