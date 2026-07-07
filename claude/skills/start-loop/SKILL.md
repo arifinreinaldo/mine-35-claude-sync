@@ -9,10 +9,13 @@ Turn a stated aim into the right kind of running loop: ground → interview → 
 
 ## Step 0 — Ground in project context
 
-Before anything else, read what's available (skip silently what isn't):
+Before anything else, probe these exact paths in the working directory — skip silently what isn't there:
 
-- Project `CLAUDE.md` (the global one is already in context) — conventions, test/build commands, guardrails that shape the loop spec.
-- `llm_wiki/map.md` or an equivalent knowledge layer (docs wiki, `CONTEXT.md`) — route domain questions through it instead of re-deriving from code.
+- `./CLAUDE.md` — project conventions, test/build commands, guardrails that shape the loop spec (the global one is already in context).
+- `./llm_wiki/map.md` or an equivalent knowledge layer (`CONTEXT.md`, docs wiki) — route domain questions through it instead of re-deriving from code.
+- The repo's config surface as relevant: `analysis_options.yaml`, `pubspec.yaml`, `composer.json`, … plus `git status` for branch and cleanliness.
+
+Probe candidate paths directly (Read / `test -f`) — never recursive-glob a large or non-repo directory for them; a home-dir glob times out.
 
 Use what you find to pre-fill the Step 2 defaults (done-check command, commit policy, do-not-touch list) so every question is anchored in the project's reality, not generic.
 
@@ -50,6 +53,8 @@ Present one block and get explicit OK:
 - **Loop prompt** — must contain all four: the end-condition check, "stop the loop when it passes", the iteration/time cap, and what not to touch.
 - **Guardrails** — stop criteria, commit policy, escalation rule: "if the same failure repeats 3×, stop and report instead of retrying."
 
+If the user pre-authorized launch ("start now", "no questions", "just go"): don't block on confirmation — bake in the Step 2 defaults, launch, and present the spec declaratively ("running with these defaults — interrupt if any is wrong"). Pre-authorization waives the pause, never the guardrails: the end condition, caps, and do-not-touch list are still mandatory.
+
 ## Step 5 — Launch & handoff
 
 Invoke the `loop` skill with the spec as args. Tell the user how to stop it early (interrupt, or say "stop the loop").
@@ -73,8 +78,10 @@ When a blocker interrupts this skill — a step that fails, a missing preconditi
 
 ### Known Blockers
 
-_None yet._
+- 2026-07-07 — Step 0 originally said "read what's available"; agents implemented that as recursive Globs, which time out (20s) on large non-repo working dirs like the home directory. Root cause: unbounded search for fixed-name files. Fix baked into Step 0: probe exact candidate paths directly.
 
 ### Changelog
 
 <!-- YYYY-MM-DD — blocker → fix -->
+2026-07-07 — home-dir glob timeout in Step 0 (subagent test B, reproduced 2×) → probe exact paths directly, never recursive-glob large dirs.
+2026-07-07 — "start RIGHT NOW, no questions" had no defined behavior (subagent pressure test C) → Step 4 conditional: pre-authorization waives the blocking pause, never the end condition/caps/do-not-touch guardrails.
