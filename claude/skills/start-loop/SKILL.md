@@ -5,7 +5,16 @@ description: Use when the user states an aim they want pursued repeatedly until 
 
 # Start Loop
 
-Turn a stated aim into the right kind of running loop: interview → classify → spec → confirm → launch.
+Turn a stated aim into the right kind of running loop: ground → interview → classify → spec → confirm → launch.
+
+## Step 0 — Ground in project context
+
+Before anything else, read what's available (skip silently what isn't):
+
+- Project `CLAUDE.md` (the global one is already in context) — conventions, test/build commands, guardrails that shape the loop spec.
+- `llm_wiki/map.md` or an equivalent knowledge layer (docs wiki, `CONTEXT.md`) — route domain questions through it instead of re-deriving from code.
+
+Use what you find to pre-fill the Step 2 defaults (done-check command, commit policy, do-not-touch list) so every question is anchored in the project's reality, not generic.
 
 ## Step 1 — Capture the aim
 
