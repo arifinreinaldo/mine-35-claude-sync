@@ -48,3 +48,22 @@ flutter_rad has a deep `llm_wiki/` (15+ files, ~100k lines) that mirrors the ser
 - ❌ Answering from training knowledge without consulting the map (the wiki overrides general Flutter knowledge here)
 - ❌ Reading `llm_wiki/archive/` unless explicitly asked (it's historical)
 - ❌ Treating wiki as authoritative for live row data — wiki describes the model, not the rows. For rows, use [[pull-syscon]].
+
+---
+
+## Self-Improvement Protocol
+
+When a blocker interrupts this skill — a step that fails, a missing precondition, or a wrong/ambiguous instruction above — before moving on:
+
+1. **Document** — add a bullet under **Known Blockers**: what you tried, what happened, and the root cause (not just the symptom).
+2. **Solve & verify** — apply a fix and confirm it actually works (evidence, not assertion).
+3. **Self-improve** — once verified, add a dated line to **Changelog**, then rewrite the affected instruction(s) above so the fix is baked in and the blocker can't recur. Memorialize only reproducible, structural blockers — not one-off transient failures.
+4. **Escalate if risky** — if the rewrite is uncertain, high-blast-radius, or changes this skill's core behavior, do NOT self-edit: show the user the proposed change and get review first.
+
+### Known Blockers
+
+_None yet._
+
+### Changelog
+
+<!-- YYYY-MM-DD — blocker → fix -->
