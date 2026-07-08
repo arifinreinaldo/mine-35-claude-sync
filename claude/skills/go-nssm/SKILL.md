@@ -33,7 +33,7 @@ The scripts encode hard-won Windows gotchas (self-elevation, the ERROR_SERVICE_M
 2. **Replace the placeholder tokens** in every copied `.bat`:
    - `__SERVICE__` → the Windows service name, PascalCase, no spaces (e.g. `SimplrMssqlLogger`). Must be identical across all four files.
    - `__EXE__` → the output binary name (e.g. `myapp.exe`). Same in all four files.
-3. **Set the port source** in `install-service.bat` (used only for the inbound firewall rule). The template defaults to reading `LISTEN_ADDR=:PORT` from `.env`. If the app takes its port differently, swap the marked block for one of the alternatives documented inside it (`PORT=` key, or a hard-coded port). If the app is not a network listener, delete the port + firewall lines.
+3. **Set the port source** in `install-service.bat` (used only for the inbound firewall rule). A `set "PORT=8080"` fallback stays no matter what; the variant block only overrides it when it reads a real port, so a missing `.env` or absent key falls back safely. The template defaults to reading `LISTEN_ADDR=:PORT` from `.env`. If the app takes its port differently, delete the block marked `>>> default variant … <<<` and paste an alternative from the comment above it (`PORT=` key, fixed port, or none). If the app is not a network listener, delete the port block AND the two `netsh` firewall lines.
 4. **Gitignore the build output** (`/__EXE__`) but **track `nssm.exe`** — narrow any blanket `*.exe` ignore to just the built binary, or `nssm.exe` won't be committed.
 5. Tell the user the deploy flow: run `build.bat`, then right-click `install-service.bat` → the scripts self-elevate. `uninstall-service.bat` removes it.
 

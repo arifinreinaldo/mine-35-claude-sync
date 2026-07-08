@@ -22,18 +22,29 @@ set "SERVICE=__SERVICE__"
 set "EXE=%APPDIR%\__EXE__"
 
 REM === PORT (firewall rule only) =========================================
-REM Default: read LISTEN_ADDR=":8080" or "host:8080" from .env; fallback 8080.
-REM The "x" prefix keeps a leading-colon value (":8080") from collapsing to token 1.
-REM   ALT A -- app uses a PORT= key in .env:
-REM     for /f "tokens=2 delims==:" %%a in ('findstr /b /i /r /c:"^PORT *[=:]" "%APPDIR%\.env"') do set "PORT=%%a"
-REM     set "PORT=%PORT: =%"   &   (delete the LISTEN_ADDR block below)
-REM   ALT B -- fixed port: set "PORT=8080"   (delete the .env parse below)
-REM   ALT C -- app is not a listener: delete this whole block AND the firewall lines.
+REM This fallback ALWAYS stays -- every variant below only overrides it when
+REM it successfully reads a port, so a missing/empty .env safely keeps 8080.
 set "PORT=8080"
+REM
+REM Pick ONE variant. Default (kept below) reads LISTEN_ADDR=":8080" or
+REM "host:8080" from .env. To switch, delete the marked default block and
+REM paste the alternative in its place (the "set PORT=8080" line stays).
+REM   ALT A -- app uses a PORT= key in .env (e.g. PORT=9100):
+REM     REM  /c: is REQUIRED: without it findstr treats the space as an OR
+REM     REM  separator and splits the pattern, matching any PORT*-prefixed key.
+REM     if exist "%APPDIR%\.env" for /f "tokens=2 delims==:" %%a in ('findstr /b /i /r /c:"^PORT *[=:]" "%APPDIR%\.env"') do set "PORT=%%a"
+REM     set "PORT=%PORT: =%"
+REM   ALT B -- fixed port: nothing to add, the set "PORT=8080" above is it.
+REM   ALT C -- app is not a listener: delete this whole block AND the two
+REM            netsh firewall lines further down.
+REM
+REM >>> default variant (LISTEN_ADDR) -- delete these 3 lines to switch variant
 set "LISTEN="
 if exist "%APPDIR%\.env" for /f "tokens=2 delims==" %%a in ('findstr /b /i /c:"LISTEN_ADDR" "%APPDIR%\.env"') do set "LISTEN=%%a"
 set "LISTEN=%LISTEN: =%"
 if defined LISTEN for /f "tokens=2 delims=:" %%b in ("x%LISTEN%") do set "PORT=%%b"
+REM <<< end default variant. The "x" prefix keeps a leading-colon value
+REM     (":8080") from collapsing to token 1.
 REM =======================================================================
 
 REM --- locate nssm: vendored next to this .bat, else on PATH ---
