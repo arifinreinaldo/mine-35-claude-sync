@@ -87,7 +87,20 @@ Model IDs: `claude-opus-4-8`, `claude-sonnet-5`, `claude-haiku-4-5-20251001`.
 - `/my-review` — staged interactive review: architecture → quality → testing → performance → mobile.
 - `/feynman` — step-by-step plain-language breakdown; triggers on "feynman this" or explicit request.
 
-**Skill self-improvement (always on):** when executing any personal skill (`~/dotfiles/claude/skills/`) and a blocker interrupts it — a failing step, missing precondition, or wrong/ambiguous instruction — apply the Self-Improvement Protocol without being asked: document it under the skill's **Known Blockers**, fix and verify (evidence, not assertion), add a dated **Changelog** line, and rewrite the affected instruction so it can't recur. If the skill lacks those sections, add them. Memorialize only reproducible, structural blockers — not one-off transient failures. Risky or behavior-changing rewrites: show me first instead of self-editing. Plugin skills aren't ours to edit — report their blockers to me instead.
+## Self-Improvement Protocol (always on)
+
+Trigger — after solving an issue, apply the counterfactual test: would a corrected instruction, had it existed at session start, have prevented the issue or materially shortened the path? No → don't memorialize. One-off transient failures never qualify. Main session only — subagents and background loops never apply this protocol.
+
+Dedup first — check the lesson isn't already captured in CLAUDE.md itself, auto-memory, the relevant skill, or the repo's knowledge layer (llm_wiki). Already covered → fix it there or drop it. One lesson lives in one place.
+
+| Root cause lives in | Action |
+|---|---|
+| Personal skill (`~/dotfiles/claude/skills/`) | Document under **Known Blockers**, fix and verify (evidence, not assertion), dated **Changelog** line, rewrite the instruction so it can't recur. Add those sections if missing. Risky/behavior-changing rewrites: show me first. Plugin skills aren't ours — report instead. |
+| Global CLAUDE.md (lesson applies across projects) | Propose exact edit (old → new) in one short block; on my OK, apply + push via `/update-claude-md`. Commit as `docs(self-improve): <lesson>`. |
+| Project CLAUDE.md (repo-specific workflow) | Propose exact edit; on my OK, edit in-repo, commit per Git Conventions as `docs(claude-md): <lesson>`. |
+| Code/config knowledge in a repo with a knowledge layer | Route to that layer (llm_wiki update), never CLAUDE.md. |
+
+Anti-bloat — CLAUDE.md is a per-session token budget: prefer rewriting or tightening an existing rule over adding a new one; deleting a stale rule counts as an improvement. CLAUDE.md edits are never auto-applied. Memory holds facts/context; CLAUDE.md holds standing instructions.
 
 ## Git Conventions
 
