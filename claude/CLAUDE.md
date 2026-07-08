@@ -8,25 +8,23 @@ Direct instruction in chat > this file > plugin/skill defaults. When process fra
 
 ## Ambiguity Protocol
 
-- **High** (vague/conceptual): full question sequence.
+- **High** (vague/conceptual): interview to converge scope — goal, constraints, success criterion — before building.
 - **Medium** (gaps, or you must assume a structural pattern not explicitly stated): targeted questions.
 - **Low** (clear and specific): verify quickly, proceed.
 - **Trivial** (typo, rename, tooltip): trust intent, just do it.
 
 Confirm detected tensions back to me before planning non-trivial work. Propose-to-clarify: never a blank questionnaire — anchor every question in a hypothetical baseline. Come back with answers, not just questions. Disagree honestly.
 
-## The 4 Invariables (canonical checklist — all gates reference this)
+## The 4 Invariables (check before non-trivial code)
 
-| Question | Maps To |
-|---|---|
-| Where does state live? | Ownership & truth |
-| Where does feedback live? | Observability |
-| What breaks if I delete this? | Coupling & fragility |
-| When does timing work? | Async & ordering |
+- Where does state live? (ownership & truth)
+- Where does feedback live? (observability)
+- What breaks if I delete this? (coupling & fragility)
+- When does timing work? (async & ordering)
 
 Before non-trivial code, also confirm: follows existing patterns (or breaks them intentionally); security addressed. Any unclear → flag and ask or defer.
 
-**Red lines (stop and flag):** unclear state ownership, unknown blast radius, race hazards, security issues, significant complexity debt, unknown unknowns on non-trivial changes.
+**Red lines (stop and flag):** unclear state ownership, unknown blast radius, race hazards, security issues, significant complexity debt.
 
 ## Goal-Driven Execution
 
@@ -40,7 +38,7 @@ Before non-trivial code, also confirm: follows existing patterns (or breaks them
 - "Engineered enough": used 1–2× → inline; 3+× → extract; unsure → present both with tradeoffs.
 - Prefer too many tests over too few. Err toward handling more edge cases, not fewer.
 - Explicit over clever.
-- Falsifiability: every recommendation states how it could be wrong.
+- Falsifiability: non-trivial recommendations state how they could be wrong.
 - Prefer independently revertible changes; code reverts are easy and preferred.
 
 ## When to Use Plan Mode
@@ -51,9 +49,9 @@ Before non-trivial code, also confirm: follows existing patterns (or breaks them
 
 ## Implementation Workflow
 
-- Before coding: present approach + key touch points, confirm. Bug fixes: root cause analysis before the fix.
+- Before non-trivial coding (Medium+ ambiguity or plan-mode triggers): present approach + key touch points, confirm. Low/Trivial: proceed. Bug fixes: root cause analysis before the fix.
 - After: run relevant tests/analysis; flag deferred items explicitly.
-- Issue reporting (any bug/smell/risk): describe with `file:line` → 2–3 options incl. do-nothing → effort/risk/impact per option → recommendation mapped to my preferences → ask approval.
+- Issue reporting (non-trivial bug/smell/risk — trivial ones get one line + fix): describe with `file:line` → 2–3 options incl. do-nothing → effort/risk/impact per option → recommendation mapped to my preferences → ask approval.
 
 ## Tech Stack
 
@@ -116,24 +114,5 @@ Anti-bloat — CLAUDE.md is a per-session token budget: prefer rewriting or tigh
 <!-- rtk-instructions v2 -->
 # RTK (Rust Token Killer)
 
-**Golden Rule:** Always prefix commands with `rtk` — even in `&&` chains. Unknown commands pass through unchanged, so `rtk` is always safe.
-
-```bash
-rtk git add . && rtk git commit -m "msg" && rtk git push
-```
-
-| Category | Commands | Savings |
-|---|---|---|
-| Git | `status` `log` `diff` `show` `add` `commit` `push` `pull` `branch` `fetch` `stash` `worktree` | 59-80% |
-| GitHub | `gh pr view/checks` `gh run list` `gh issue list` `gh api` | 26-87% |
-| Docker | `docker ps/images/logs` `kubectl get/logs` | 85% |
-| Files | `ls` `read` `grep` `find` | 60-75% |
-| Network | `curl` `wget` | 65-70% |
-| Debug | `err` `log` `json` `deps` `env` `summary` `diff` | 70-90% |
-
-```bash
-rtk gain        # token savings stats
-rtk discover    # find missed RTK usage in sessions
-rtk proxy <cmd> # run without filtering (debug)
-```
+Prefix all shell commands with `rtk` (Bash and PowerShell), even in `&&` chains — unknown commands pass through unchanged, so `rtk` is always safe. Applies only when a shell command is already the right tool; never use `rtk grep`/`rtk read`/`rtk find` over the dedicated Grep/Read/Glob tools.
 <!-- /rtk-instructions -->
