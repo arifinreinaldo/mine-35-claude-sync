@@ -24,7 +24,7 @@ The scripts encode hard-won Windows gotchas (self-elevation, the ERROR_SERVICE_M
 | `templates/build.bat` | `go build -o <exe> .` |
 | `templates/run.bat` | Foreground dev run (build if missing, kill prior instance) |
 | `templates/install-service.bat` | Self-elevating install: remove old → install → configure auto-start/restart + log rotation → firewall rule → start → wait for RUNNING |
-| `templates/restart-service.bat` | One-step redeploy: self-elevate once, then `call install-service.bat` (which is already remove+install). Run after `build.bat` to push a new build. |
+| `templates/restart-service.bat` | One-step redeploy: `go build` the current source, then `call install-service.bat` (remove old + install new + start). Build runs pre-elevation (Go is on the user PATH, not the admin PATH). Replaces the two-step build-then-install. |
 | `templates/uninstall-service.bat` | Self-elevating stop + remove + firewall cleanup (keeps files/logs) |
 | `nssm.exe` | Vendored NSSM (x64). Copy next to the .bat files. |
 
@@ -36,7 +36,7 @@ The scripts encode hard-won Windows gotchas (self-elevation, the ERROR_SERVICE_M
    - `__EXE__` → the output binary name (e.g. `myapp.exe`). Same in all four files.
 3. **Set the port source** in `install-service.bat` (used only for the inbound firewall rule). A `set "PORT=8080"` fallback stays no matter what; the variant block only overrides it when it reads a real port, so a missing `.env` or absent key falls back safely. The template defaults to reading `LISTEN_ADDR=:PORT` from `.env`. If the app takes its port differently, delete the block marked `>>> default variant … <<<` and paste an alternative from the comment above it (`PORT=` key, fixed port, or none). If the app is not a network listener, delete the port block AND the two `netsh` firewall lines.
 4. **Gitignore the build output** (`/__EXE__`) but **track `nssm.exe`** — narrow any blanket `*.exe` ignore to just the built binary, or `nssm.exe` won't be committed.
-5. Tell the user the deploy flow: run `build.bat`, then right-click `install-service.bat` → the scripts self-elevate. To push a later build, run `build.bat` then `restart-service.bat` (one step = remove old + install new). `uninstall-service.bat` removes it.
+5. Tell the user the deploy flow: run `build.bat`, then right-click `install-service.bat` → the scripts self-elevate. To push a later build, just run `restart-service.bat` (it builds, then removes old + installs new in one step). `uninstall-service.bat` removes it.
 
 ## Gotchas the scripts already handle (do not "simplify" away)
 
