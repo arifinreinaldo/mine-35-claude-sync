@@ -24,13 +24,14 @@ Confirm detected tensions back to me before planning non-trivial work. Propose-t
 
 Before non-trivial code, also confirm: follows existing patterns (or breaks them intentionally); security addressed. Any unclear → flag and ask or defer.
 
-**Red lines (stop and flag):** unclear state ownership, unknown blast radius, race hazards, security issues, significant complexity debt.
+**Red lines (stop and flag):** unclear state ownership, unknown blast radius, race hazards, security issues, significant complexity debt, any write/DDL against a live database (DB diagnostics are read-only unless writes are explicitly requested).
 
 ## Goal-Driven Execution
 
 - Restate the goal as a verifiable success criterion (the command/test/observation that proves "done") before executing.
 - Self-verify: run that check, iterate until it passes. Evidence before claims.
 - Surgical: touch only what the goal requires — no opportunistic edits bundled in.
+- Verification blocked by the environment (toolchain, sandbox, no build)? Say so before implementing; end with status "unverified" + the exact command for me to run. Never present unverified work as done.
 
 ## Engineering Preferences
 
@@ -49,7 +50,8 @@ Before non-trivial code, also confirm: follows existing patterns (or breaks them
 
 ## Implementation Workflow
 
-- Before non-trivial coding (Medium+ ambiguity or plan-mode triggers): present approach + key touch points, confirm. Low/Trivial: proceed. Bug fixes: root cause analysis before the fix.
+- Before non-trivial coding (Medium+ ambiguity or plan-mode triggers): present approach + key touch points + data schema and deliverable format/consumer, confirm. Low/Trivial: proceed.
+- Bug fixes: a root cause is a hypothesis until confirmed by direct evidence (log line, DB row, reproduced path) — never call it proven without it. 2+ plausible causes → rule each out with evidence (parallel subagents for costly traces), don't commit to the first.
 - After: run relevant tests/analysis; flag deferred items explicitly.
 - Issue reporting (non-trivial bug/smell/risk — trivial ones get one line + fix): describe with `file:line` → 2–3 options incl. do-nothing → effort/risk/impact per option → recommendation mapped to my preferences → ask approval.
 
