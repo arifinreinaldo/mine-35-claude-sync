@@ -1,11 +1,11 @@
 ---
 name: ground-tooling
-description: Establish ground truth for CLI/SDK syntax from the installed tool before writing deploy scripts or integration code. Use when writing CLI commands, deploy/setup scripts, or SDK integrations — especially version-drift-prone tools (appwrite, wrangler, firebase, gcloud, supabase, artisan, flutter) where remembered syntax may be a version behind.
+description: Establish ground truth for CLI/SDK syntax from the installed tool before writing deploy scripts or integration code. Use when authoring deploy/setup scripts, integration CLI invocations, or SDK integration code — especially version-drift-prone tools (appwrite, wrangler, firebase, gcloud, supabase, artisan, flutter) where remembered syntax may be a version behind. Not for everyday shell commands (git, ls, npm).
 ---
 
 # Ground Tooling
 
-Before writing any CLI command, deploy script, or SDK integration, establish ground truth from the **installed** tool — not from memory. CLI command names, flags, and SDK service/method names drift between versions; a confident-but-stale command fails the deploy.
+Before writing any deploy script, integration/setup CLI invocation, or SDK integration, establish ground truth from the **installed** tool — not from memory. CLI command names, flags, and SDK service/method names drift between versions; a confident-but-stale command fails the deploy.
 
 ## Order — stop at the first rung that answers you
 
