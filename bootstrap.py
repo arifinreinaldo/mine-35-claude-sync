@@ -89,6 +89,7 @@ CLAUDE.mkdir(exist_ok=True)
 symlink(DOTS / "claude" / "CLAUDE.md",     CLAUDE / "CLAUDE.md")
 symlink(DOTS / "claude" / "settings.json", CLAUDE / "settings.json")
 symlink(DOTS / "claude" / "skills",        CLAUDE / "skills")
+symlink(DOTS / "claude" / "directives",    CLAUDE / "directives")
 
 # gitconfig is OS-specific — pick the matching variant, skip if absent
 _gitcfg_name = "gitconfig.windows" if IS_WIN else "gitconfig.macos" if IS_MAC else "gitconfig.linux"

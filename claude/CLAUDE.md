@@ -61,6 +61,12 @@ Before non-trivial code, also confirm: follows existing patterns (or breaks them
 - Secondary/Infra: Docker, AWS, Azure, Supabase, JavaScript/TypeScript, iOS/Swift
 - Scripting: Python for tooling/analysis
 
+## API Standard (backends)
+
+Backends exposing JSON endpoints follow one response contract: success `{message, data}`; errors `{message, errors, retryable, request_id}` with a real HTTP status code (**never 200**); `retryable` true only on 429/503; `X-Request-Id` on every response; `Retry-After` on 429/503; `Idempotency-Key` on harmful mutations. Canonical spec: `~/.claude/directives/api-standard.md`.
+
+On `/init` (or scaffolding) in a project that exposes JSON endpoints: generate that project's `docs/api-standard.md` from the canonical spec — tailored to the stack, extending any existing response convention — and add to the project CLAUDE.md: "When creating or generating any JSON API endpoint, follow docs/api-standard.md." Skip for HTML-only / static projects.
+
 ## Model & Effort Routing
 
 If a better-fit model exists for the task, say so in one line at the top with the switch command — suggest, never claim to have switched (you can't).

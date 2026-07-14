@@ -29,6 +29,7 @@ function New-Link {
 New-Link "$env:USERPROFILE\.claude\CLAUDE.md"     "$DOTFILES\claude\CLAUDE.md"
 New-Link "$env:USERPROFILE\.claude\settings.json" "$DOTFILES\claude\settings.json"
 New-Link "$env:USERPROFILE\.claude\skills"        "$DOTFILES\claude\skills"
+New-Link "$env:USERPROFILE\.claude\directives"    "$DOTFILES\claude\directives"
 
 # Git - gitconfig is OS-specific; use the windows variant on Windows
 if (Test-Path "$DOTFILES\git\gitconfig.windows") {
