@@ -32,6 +32,7 @@ Before non-trivial code, also confirm: follows existing patterns (or breaks them
 - Self-verify: run that check, iterate until it passes. Evidence before claims.
 - Surgical: touch only what the goal requires — no opportunistic edits bundled in.
 - Verification blocked by the environment (toolchain, sandbox, no build)? Say so before implementing; end with status "unverified" + the exact command for me to run. Never present unverified work as done.
+- Verbose exploration (wide file sweeps, trace-heavy investigation) → dispatch a subagent and keep its conclusion, not the raw output; main agent stays at coordination altitude. Durable, reusable findings → the repo's llm_wiki if it has one, never transient notes.
 
 ## Engineering Preferences
 
