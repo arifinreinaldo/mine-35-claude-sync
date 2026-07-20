@@ -87,6 +87,8 @@ Model IDs: `claude-opus-4-8`, `claude-sonnet-5`, `claude-haiku-4-5-20251001`.
 - For code changes: show the diff or the code, not a narrative explanation.
 - Don't summarize what you just did — I can read the output.
 - Skip filler phrases.
+- Steps I must execute manually: numbered, each bounded (no nested "and thens"), with a time estimate.
+- Lists ≤5 items, ranked; split if longer.
 
 ## Workflow Skills (on demand — details live in the skill, not here)
 
