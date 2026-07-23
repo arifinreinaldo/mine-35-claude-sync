@@ -19,7 +19,7 @@ Work top-down. Stop at the layer that explains the problem.
 
 ### 1. Container state
 ```bash
-rtk docker ps                    # is it running, exited, or restarting?
+docker ps                        # is it running, exited, or restarting?
 docker ps -a --filter name=foo   # include stopped containers
 ```
 
@@ -32,7 +32,7 @@ Exit code tells you a lot:
 
 ### 2. Logs
 ```bash
-rtk docker logs <container>
+docker logs <container>
 docker logs <container> --tail 100 --follow   # live tail
 docker logs <container> --since 10m           # last 10 minutes
 ```

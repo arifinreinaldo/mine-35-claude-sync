@@ -2,19 +2,8 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "claude-fable-5",
+  "model": "opus[1m]",
   "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash|PowerShell",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "rtk hook claude"
-          }
-        ]
-      }
-    ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit",
