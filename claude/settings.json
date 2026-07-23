@@ -2,7 +2,6 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "claude-fable-5[1m]",
   "hooks": {
     "PreToolUse": [
       {
@@ -49,6 +48,10 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "bash \"/Users/reinaldoarifin/.claude/plugins/cache/ponytail/ponytail/4.8.4/hooks/ponytail-statusline.sh\""
+  },
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true,
     "commit-commands@claude-plugins-official": false,
@@ -61,9 +64,10 @@
     "swift-lsp@claude-plugins-official": false,
     "code-review@claude-plugins-official": false,
     "ponytail@ponytail": true,
-    "gopls-lsp@claude-plugins-official": false,
+    "gopls-lsp@claude-plugins-official": true,
     "android-skills@android-skills": false,
-    "i-have-adhd@i-have-adhd": true
+    "i-have-adhd@i-have-adhd": true,
+    "obsidian@obsidian-skills": true
   },
   "extraKnownMarketplaces": {
     "claude-code-skills": {
@@ -95,6 +99,12 @@
         "source": "github",
         "repo": "ayghri/i-have-adhd"
       }
+    },
+    "obsidian-skills": {
+      "source": {
+        "source": "github",
+        "repo": "kepano/obsidian-skills"
+      }
     }
   },
   "effortLevel": "xhigh",
@@ -103,5 +113,6 @@
   "skipWorkflowUsageWarning": true,
   "theme": "dark-ansi",
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "model": "claude-fable-5[1m]"
 }
