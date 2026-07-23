@@ -121,9 +121,3 @@ Anti-bloat — CLAUDE.md is a per-session token budget: prefer rewriting or tigh
 
 - **`domain-modeling` / `grill-with-docs`** (mattpocock subset) — these build a `CONTEXT.md` glossary + `docs/adr/`. Do **not** auto-activate them in a repo that already has an established domain-knowledge layer (an `llm_wiki/`, a docs wiki, or an existing `CONTEXT.md`/glossary) **or** a "don't proactively create docs" rule. In such a repo that existing layer is the single source of truth — read it for vocabulary, and never spin up a parallel `CONTEXT.md`/`docs/adr/` (DRY). They stay valid for greenfield repos with no knowledge layer, and via explicit `/grill-with-docs`. The `grilling` interview loop (no docs) is always fine.
   - Concrete: `flutter_rad_pvmi` has `llm_wiki/` — defer to it there; do not generate `CONTEXT.md`/ADRs in that repo.
-
-<!-- rtk-instructions v2 -->
-# RTK (Rust Token Killer)
-
-Prefix all shell commands with `rtk` (Bash and PowerShell), even in `&&` chains — unknown commands pass through unchanged, so `rtk` is always safe. Applies only when a shell command is already the right tool; never use `rtk grep`/`rtk read`/`rtk find` over the dedicated Grep/Read/Glob tools.
-<!-- /rtk-instructions -->
