@@ -74,12 +74,12 @@ If a better-fit model exists for the task, say so in one line at the top with th
 
 | Task | Model | Effort |
 |---|---|---|
-| Debugging, root cause, ambiguous/high-blast-radius planning | Opus 4.8 | max |
-| Planning — clear scope | Opus 4.8 | xhigh |
+| Debugging, root cause, ambiguous/high-blast-radius planning | Opus 5 | max |
+| Planning — clear scope | Opus 5 | xhigh |
 | Execution — plan already decided | Sonnet 5 | high |
 | Trivial — rename, typo, tooltip | Haiku 4.5 | high |
 
-Model IDs: `claude-opus-4-8`, `claude-sonnet-5`, `claude-haiku-4-5-20251001`.
+Model IDs: `claude-opus-5`, `claude-sonnet-5`, `claude-haiku-4-5-20251001`.
 
 ## Response Style
 
