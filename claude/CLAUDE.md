@@ -68,6 +68,12 @@ Backends exposing JSON endpoints follow one response contract: success `{message
 
 On `/init` (or scaffolding) in a project that exposes JSON endpoints: generate that project's `docs/api-standard.md` from the canonical spec — tailored to the stack, extending any existing response convention — and add to the project CLAUDE.md: "When creating or generating any JSON API endpoint, follow docs/api-standard.md." Skip for HTML-only / static projects.
 
+## Postman Collections
+
+Self-contained: every variable declared in the collection's own `variable` block with a working default, so importing the collection alone runs green with no environment selected. Secrets stay empty there (collections get committed) — pass at run time with `--env-var`. An environment file is optional and wins when selected (Postman resolves environment → collection); namespace variables per feature (`paymongo*`, `duitNow*`) so one shared environment can serve every collection.
+
+In scripts: read with `pm.variables.get()`, never `pm.environment.get()` (environment scope only → `undefined` standalone); write with `pm.environment.set()` (newman gives an ephemeral environment even without `-e`); declare with `var` inside an IIFE, never top-level `const`/`let` (newman shares one sandbox scope across requests → "already been declared"). Sign a webhook body by building it in a pre-request script and sending only `{{thatVar}}` — a body containing `{{...}}` is substituted after signing, so the bytes signed stop matching the bytes sent. Verify with `newman run` **both** with and without `-e`; each of these fails in only one of the two modes.
+
 ## Model & Effort Routing
 
 If a better-fit model exists for the task, say so in one line at the top with the switch command — suggest, never claim to have switched (you can't).
