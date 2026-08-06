@@ -20,6 +20,31 @@ Based on Karpathy's LLM-wiki pattern (raw source → wiki → schema; ingest / q
 - `map.md` = floor plan (intent router). `areas/*.md` = rooms. `code_map.md` = address book (code path → room).
 - **Search optimization:** read `map.md` → 1–3 target pages. Never read the whole wiki.
 
+## Writing standard — ASD-STE100 Simplified Technical English
+
+Every `llm_wiki/*.md` page is written in STE. Wiki pages are read under time pressure, by
+machines and by non-native speakers. Ambiguity costs more here than in ordinary prose.
+
+**Sentences**
+- One idea per sentence. Maximum 20 words in procedures, 25 in description.
+- Maximum 6 sentences per paragraph. One topic per paragraph.
+- Use a vertical list for a sequence or an enumeration. Do not bury steps in prose.
+- Do not drop articles or sentence parts. Write "the config loads", not "config loads".
+
+**Words**
+- One term per concept, on every page. A `FormConfig` is never "the form record" later.
+- Maximum 3 words per noun cluster. Break up "syscon action chain resolver order".
+- Code identifiers (class, table, column, method) are the Technical Names — this repo's
+  glossary. Use them verbatim in backticks. Never paraphrase an identifier.
+
+**Verbs**
+- Active voice. Name the actor: "`ActionBloc` resolves the chain", not "the chain is resolved".
+- Simple tenses only: infinitive, imperative, simple present, simple past, simple future,
+  past participle as an adjective. No present perfect. No `-ing` verb forms.
+
+The full standard is 53 rules plus a ~900-word dictionary (free PDF, asd-ste100.org). The
+subset above is what changes wiki quality. Do not fetch the rest mid-task.
+
 ## Operation: init
 
 Run when a project has no `llm_wiki/` yet. Scaffold + a shallow seed pass — do NOT deep-crawl every file.
@@ -60,6 +85,8 @@ On request, or scoped after `update`:
 - **Stale paths:** `code_map.md` rows pointing at files absent from `git ls-files`.
 - **Coverage gaps:** top-level dirs with no `code_map.md` row.
 - **Contradictions / broken `[[links]]`** across pages.
+- **STE violations:** sentences over the word limit, passive voice, `-ing` verb forms, and
+  synonym drift — the same concept named two ways across pages.
 
 Report concisely; fix the cheap ones, flag the rest.
 
@@ -78,6 +105,7 @@ The wiki is a cache of the code; its value collapses the moment it drifts. `llm_
 - ❌ Letting the wiki drift — an out-of-date page is worse than no page. `update` is not optional after a change.
 - ❌ Stamping the wiki into a non-git dir — it must be versioned with the code.
 - ❌ Answering from training knowledge when the wiki covers it — the wiki overrides general knowledge for this repo.
+- ❌ Writing wiki pages in essay English — long sentences, passive voice, and synonyms make a page slower to route through than the code it summarizes.
 
 ## Relationship to existing setup
 

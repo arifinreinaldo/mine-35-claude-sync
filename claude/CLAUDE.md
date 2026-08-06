@@ -96,6 +96,14 @@ Model IDs: `claude-opus-5`, `claude-sonnet-5`, `claude-haiku-4-5-20251001`.
 - Steps I must execute manually: numbered, each bounded (no nested "and thens"), with a time estimate.
 - Lists ≤5 items, ranked; split if longer.
 
+### Technical prose — ASD-STE100 basics
+
+Applies to docs, wiki pages, code comments, commit bodies, issue reports. **Not** to conversational replies — STE is a documentation standard, not general-purpose writing.
+
+- One idea per sentence: ≤20 words procedural, ≤25 descriptive; ≤6 sentences per paragraph, one topic each.
+- Active voice, name the actor; simple tenses only (no present perfect, no `-ing` verb forms); ≤3-word noun clusters; don't drop articles.
+- One term per concept, never varied for variety — same for identifiers. Code names (class, table, column) are the glossary: use them verbatim, never paraphrased.
+
 ## Workflow Skills (on demand — details live in the skill, not here)
 
 - `/research-gate` — grounded, cited planning brief before building a non-trivial feature (any stack).
