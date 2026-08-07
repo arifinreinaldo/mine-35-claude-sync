@@ -27,12 +27,12 @@ dart tool/build_apk.dart --flavor devSales --mode debug
 
 **Batch (preferred for multiple flavors):**
 ```bash
-dart tool/build_apk.dart --batch devLocal:debug,demoSales:release,directApp:release
+dart tool/build_apk.dart --batch devLocal:debug,demoSales:release,directApp:release,directWms:release
 ```
 
 **With upload + notify (matches CLAUDE.md `deploy build` shortcut):**
 ```bash
-dart tool/build_apk.dart --batch devLocal:debug,demoSales:release,directApp:release --upload --notify
+dart tool/build_apk.dart --batch devLocal:debug,demoSales:release,directApp:release,directWms:release --upload --notify
 ```
 
 The tool handles: APK signing (via `key.properties`), version bumping, output renaming, optional Google Drive / OneDrive upload, and ntfy notifications.
@@ -46,7 +46,7 @@ The tool handles: APK signing (via `key.properties`), version bumping, output re
 
 ## Shortcuts (from CLAUDE.md)
 
-- `deploy build` → ask "Deploy devLocal (debug) + demoSales (release) + directApp (release) with upload and notify? (yes/no)" — if yes, run the batch+upload+notify command above.
+- `deploy build` → ask "Deploy devLocal (debug) + demoSales (release) + directApp (release) + directWms (release) with upload and notify? (yes/no)" — if yes, run the batch+upload+notify command above.
 - `deploy production` → ask "Deploy to Play Store internal track? (yes/no)" — if yes, run `dart run tool/deploy_play_store.dart --track internal`.
 
 ## Gotchas
