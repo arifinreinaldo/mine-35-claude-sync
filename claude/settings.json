@@ -49,7 +49,8 @@
     "code-simplifier@claude-plugins-official": true,
     "trading-ideas@claude-equity-research-marketplace": true,
     "ponytail@ponytail": true,
-    "gopls-lsp@claude-plugins-official": true
+    "gopls-lsp@claude-plugins-official": true,
+    "android-skills@android-skills": true
   },
   "extraKnownMarketplaces": {
     "claude-code-skills": {
@@ -68,6 +69,12 @@
       "source": {
         "source": "github",
         "repo": "DietrichGebert/ponytail"
+      }
+    },
+    "android-skills": {
+      "source": {
+        "source": "github",
+        "repo": "android/skills"
       }
     }
   },
