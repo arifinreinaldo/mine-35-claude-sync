@@ -4,6 +4,19 @@
   },
   "model": "opus[1m]",
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/dotfiles/scripts/block-edit-after-question.py",
+            "timeout": 15,
+            "statusMessage": "Checking for unanswered question"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit",
@@ -13,6 +26,12 @@
             "command": "f=$(python3 -c \"import sys,json;d=json.load(sys.stdin);print((d.get('tool_input') or {}).get('file_path') or (d.get('tool_response') or {}).get('filePath') or '')\"); case \"$f\" in *package-lock.json|*.lock) ;; *.dart) command -v dart >/dev/null 2>&1 && dart format \"$f\" >/dev/null ;; *.php) [ -f vendor/bin/pint ] && php vendor/bin/pint --quiet \"$f\" ;; *.js|*.jsx|*.ts|*.tsx|*.json|*.yaml|*.yml|*.css|*.html) command -v prettier >/dev/null 2>&1 && prettier --write --log-level silent \"$f\" ;; esac 2>/dev/null || true",
             "timeout": 30,
             "statusMessage": "Formatting"
+          },
+          {
+            "type": "command",
+            "command": "f=$(python3 -c \"import sys,json;d=json.load(sys.stdin);print((d.get('tool_input') or {}).get('file_path') or (d.get('tool_response') or {}).get('filePath') or '')\"); case \"$f\" in *.go) ;; *) exit 0 ;; esac; [ -f go.mod ] || exit 0; out=$(go build ./... 2>&1) || { echo 'go build ./... FAILED — fix before continuing:' >&2; echo \"$out\" | head -20 >&2; exit 2; }; exit 0",
+            "timeout": 120,
+            "statusMessage": "go build"
           }
         ]
       }
