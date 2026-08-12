@@ -99,9 +99,14 @@ If a better-fit model exists for the task, say so in one line at the top with th
 | Debugging, root cause, ambiguous/high-blast-radius planning | Opus 5 | max |
 | Planning — clear scope | Opus 5 | xhigh |
 | Execution — plan already decided | Sonnet 5 | high |
+| Review | Opus 5 or Fable 5 | high |
 | Trivial — rename, typo, tooltip | Haiku 4.5 | high |
 
-Model IDs: `claude-opus-5`, `claude-sonnet-5`, `claude-haiku-4-5-20251001`.
+Model IDs: `claude-opus-5`, `claude-sonnet-5`, `claude-fable-5`, `claude-haiku-4-5-20251001`.
+
+**Auto-routing.** Once I state a phase→model split for a piece of work ("plan opus, execute sonnet, fable review"), it stands for that whole piece of work — don't ask me to switch again. Dispatch each phase to a subagent with the Agent tool's `model:` override and keep the result; the main session stays where it is. Stating the split IS authorization to use the Agent tool for those phases. Only suggest `/model` when the *main session itself* is on the wrong model for what I'm asking right now.
+
+Brief the subagent like a colleague who just walked in — a spec or file path it can work from cold, not "see above." Subagent context does not inherit the conversation unless dispatched as `fork`. Per Goal-Driven Execution, re-run the check yourself; a subagent's "verified" is a claim, not evidence.
 
 ## Response Style
 
@@ -122,6 +127,7 @@ Applies to docs, wiki pages, code comments, commit bodies, issue reports. **Not*
 
 ## Workflow Skills (on demand — details live in the skill, not here)
 
+- `/plan-execution` — build a feature end to end: plan on Opus into a markdown spec, execute via Sonnet subagent, review via Opus subagent, verify in the main session. Calls `/research-gate` when the ground is unfamiliar.
 - `/research-gate` — grounded, cited planning brief before building a non-trivial feature (any stack).
 - `/my-review` — staged interactive review: architecture → quality → testing → performance → mobile.
 - `/feynman` — step-by-step plain-language breakdown; triggers on "feynman this" or explicit request.
