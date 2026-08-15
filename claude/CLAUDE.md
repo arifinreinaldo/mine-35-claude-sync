@@ -41,6 +41,7 @@ Before non-trivial code, also confirm: follows existing patterns (or breaks them
 - Report partial success honestly: say which parts you verified and which you did not.
 - Surgical: touch only what the goal requires — no opportunistic edits bundled in.
 - Verification blocked by the environment (toolchain, sandbox, no build)? Say so before implementing; end with status "unverified" + the exact command for me to run. Never present unverified work as done.
+- Browser-tool verification: before diagnosing any visual/animation fault, check `document.hidden` and count rAF frames. A backgrounded tab renders nothing and fakes every symptom of a broken render loop. Static DOM/state assertions stay valid there; motion, transitions and canvas output do not.
 - Verbose exploration (wide file sweeps, trace-heavy investigation) → dispatch a subagent and keep its conclusion, not the raw output; main agent stays at coordination altitude. Needs this conversation's context → `fork`; just needs a query answered → fresh Explore/general-purpose (override to Haiku for cheap mechanical work). Brief it like a colleague who just walked in: what's known, what's already ruled out, what decision the output feeds, and the return format. Durable, reusable findings → the repo's llm_wiki if it has one, never transient notes.
 
 ## Engineering Preferences
