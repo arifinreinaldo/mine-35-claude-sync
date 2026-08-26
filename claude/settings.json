@@ -62,7 +62,8 @@
     "code-review@claude-plugins-official": true,
     "ponytail@ponytail": true,
     "gopls-lsp@claude-plugins-official": true,
-    "android-skills@android-skills": true
+    "android-skills@android-skills": true,
+    "i-have-adhd@i-have-adhd": true
   },
   "extraKnownMarketplaces": {
     "claude-code-skills": {
@@ -87,6 +88,12 @@
       "source": {
         "source": "github",
         "repo": "android/skills"
+      }
+    },
+    "i-have-adhd": {
+      "source": {
+        "source": "github",
+        "repo": "ayghri/i-have-adhd"
       }
     }
   },
