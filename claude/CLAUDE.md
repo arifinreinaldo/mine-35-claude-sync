@@ -38,6 +38,7 @@ Before non-trivial code, also confirm: follows existing patterns (or breaks them
 - Self-verify: run that check, iterate until it passes. Name the exact command and show its output — `flutter analyze`, `go build ./...`, the test suite, Newman, or a live browser/device check. Evidence before claims — injected session history and memory are reference, not current state; anything older than ~72h gets re-verified before you act on it.
 - Do not trust a subagent's "verified" claim. Re-run the check yourself.
 - A background compile that exits 0 without fresh output is NOT a pass. Check the timestamps on the build artifacts.
+- Slow checks (`flutter analyze`, full builds, Newman): in Herdr (`$HERDR_ENV` = 1), run them in a pane instead of a blocking Bash call — `pane split --no-focus` -> `pane run` -> `pane wait-output --regex` -> `pane read`; the pane output is the evidence, and you see it too. Outside Herdr, run them in the foreground and show the output.
 - Report partial success honestly: say which parts you verified and which you did not.
 - Surgical: touch only what the goal requires — no opportunistic edits bundled in.
 - Verification blocked by the environment (toolchain, sandbox, no build)? Say so before implementing; end with status "unverified" + the exact command for me to run. Never present unverified work as done.
@@ -105,7 +106,7 @@ If a better-fit model exists for the task, say so in one line at the top with th
 
 Model IDs: `claude-opus-5`, `claude-sonnet-5`, `claude-fable-5`, `claude-haiku-4-5-20251001`.
 
-**Auto-routing.** Once I state a phase→model split for a piece of work ("plan opus, execute sonnet, fable review"), it stands for that whole piece of work — don't ask me to switch again. Dispatch each phase to a subagent with the Agent tool's `model:` override and keep the result; the main session stays where it is. Stating the split IS authorization to use the Agent tool for those phases. Only suggest `/model` when the *main session itself* is on the wrong model for what I'm asking right now.
+**Auto-routing.** Once I state a phase→model split for a piece of work ("plan opus, execute sonnet, fable review"), it stands for that whole piece of work — don't ask me to switch again. Dispatch each phase to a subagent with the Agent tool's `model:` override and keep the result; the main session stays where it is. Stating the split IS authorization to use the Agent tool for those phases. In Herdr, a long execute phase may instead run as a real CLI in a pane — `herdr agent start <name> --kind claude --pane <id> -- --model sonnet`, then `agent prompt --wait` and `agent read`. It is visible and interruptible, but it is a separate instance drawing on the same plan limits: one at a time, Sonnet, close the pane when done. Only suggest `/model` when the *main session itself* is on the wrong model for what I'm asking right now.
 
 Brief the subagent like a colleague who just walked in — a spec or file path it can work from cold, not "see above." Subagent context does not inherit the conversation unless dispatched as `fork`. Per Goal-Driven Execution, re-run the check yourself; a subagent's "verified" is a claim, not evidence.
 
