@@ -87,3 +87,16 @@ than the work. Write the code.
 
 Also skip Phase 2 when the build is small enough that briefing a subagent costs more than doing it
 — under roughly a hundred lines with no repetition. Plan, build inline, still review.
+
+## Known Blockers
+
+- **Planner dispatched as a subagent cannot write the spec if it is the `Plan` agent type.** That
+  type is read-only (no Write/Edit), so the spec comes back inline and the main session has to
+  save it by hand, decoding HTML entities on the way. When the main session is not on Opus and the
+  Plan phase goes to a subagent, dispatch it as `general-purpose` with `model: opus` and name the
+  one file it may write.
+
+## Changelog
+
+- 2026-09-03 — Added Known Blockers: Plan-type subagent has no Write tool; use general-purpose +
+  model override when the planner runs as a subagent.
