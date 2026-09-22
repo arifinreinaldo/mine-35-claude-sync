@@ -1,12 +1,13 @@
 {
-  "lastUpdated": 1789631091293,
+  "lastUpdated": 1790059264810,
   "skills": [
     {
       "skillId": "skill_014CginFM2dvfhHyAb27NpUN",
       "name": "saturday-action",
       "description": "Yu's weekly Saturday portfolio review routine — 30-minute structured check covering macro tape, portfolio drift, calendar look-ahead, decision queue, and logging. Use whenever Yu says \"saturday review\", \"weekly review\", \"weekly check\", \"saturday action\", \"what's the next action this week\", \"weekly routine\", or asks for the periodic portfolio status update. Outputs a Markdown checklist with current readings against IPS triggers, the next-week action queue, and a one-line log entry. Always runs against the live tracker (refresh first via yu-portfolio-analyzer or Google Sheet sync). Monthly extension fires on the last Saturday of the month with extra reconciliation tasks. Aligned with Yu's phased IPS (Phase 1 wedding-prep through Jan 2027, Phase 2 wife-arriving, Phase 3 steady-state).",
-      "source": "custom",
-      "updatedAt": "2026-05-09T10:02:28.604731Z"
+      "source": "plugin",
+      "updatedAt": "2026-05-09T10:02:28.604631Z",
+      "backingPluginId": "plugin_01JaCrgwAnkoudNkB15ezeCQ"
     },
     {
       "skillId": "skill_01Xb4dmRxQVhp8K9LpHpkJN8",
@@ -120,5 +121,8 @@
       "source": "anthropic-example",
       "updatedAt": "2026-09-14T19:41:01.576619Z"
     }
+  ],
+  "pendingClaims": [
+    "32740:134344512347651819/saturday-action"
   ]
 }
