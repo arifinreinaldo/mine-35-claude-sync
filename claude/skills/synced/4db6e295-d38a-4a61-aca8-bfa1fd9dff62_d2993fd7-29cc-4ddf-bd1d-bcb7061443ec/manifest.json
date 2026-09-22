@@ -1,5 +1,5 @@
 {
-  "lastUpdated": 1790059264810,
+  "lastUpdated": 1790066918104,
   "skills": [
     {
       "skillId": "skill_014CginFM2dvfhHyAb27NpUN",
@@ -34,8 +34,9 @@
       "skillId": "skill_014qaZ8UXfurNM8r8azdt4gK",
       "name": "skill-iterator",
       "description": "Critique any existing skill by fanning out N parallel reviewer agents, each with a distinct lens and fresh context. Returns a ranked, deduplicated improvement list with severity. Triggers on phrases like \"review this skill\", \"iterate on the skill\", \"critique this skill\", \"find improvements in skill\", \"stress test the skill\", \"harden this skill\", \"skill audit\", \"skill review pass\". Designed for skill authors who want adversarial review without anchoring bias.",
-      "source": "custom",
-      "updatedAt": "2026-05-13T09:09:56.085906Z"
+      "source": "plugin",
+      "updatedAt": "2026-05-13T09:09:56.085787Z",
+      "backingPluginId": "plugin_01YKACxKGCwc5Znf7GoER9rm"
     },
     {
       "skillId": "skill_01CB8t9DsVSASRHpcQ1LqHAV",
