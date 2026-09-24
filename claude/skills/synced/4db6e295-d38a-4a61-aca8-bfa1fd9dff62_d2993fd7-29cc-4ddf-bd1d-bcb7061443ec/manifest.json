@@ -1,5 +1,5 @@
 {
-  "lastUpdated": 1790136672038,
+  "lastUpdated": 1790178221572,
   "skills": [
     {
       "skillId": "skill_014CginFM2dvfhHyAb27NpUN",
@@ -42,15 +42,17 @@
       "skillId": "skill_01CB8t9DsVSASRHpcQ1LqHAV",
       "name": "pre-pop-scanner",
       "description": "Weekly scan to find small-cap stocks with elevated odds of a 15%+ pop in the next 3-6 weeks. Triggers on phrases like \"pre-pop scan\", \"scan for poppers\", \"find the next VELO\", \"pop candidates\", \"swing watchlist\", \"weekly screener\". Output is a ranked watchlist (top 10-15) with reasons, expected catalyst date, stop, and target. Designed for Yu — small position sizing, hard stops, swing horizon (not scalping).",
-      "source": "custom",
-      "updatedAt": "2026-05-13T09:48:54.909158Z"
+      "source": "plugin",
+      "updatedAt": "2026-05-13T09:48:54.908992Z",
+      "backingPluginId": "plugin_016SDUZsJBTdoW4rBRomMSzo"
     },
     {
       "skillId": "skill_01BoaGKucVrsnEUReijUK7sW",
       "name": "flutter-rad-widget-builder",
       "description": "Generate Flutter widgets following RAD (Reinaldo App Development) standards. Use when creating new StatefulWidgets with RAD prefix, mixins, mode-based layouts, and standardized parameter patterns. Triggers on requests like \"create a RAD widget\", \"build a new input field\", \"generate a dropdown widget\", or any Flutter widget creation for the flutter_rad project.",
-      "source": "custom",
-      "updatedAt": "2026-01-22T02:47:14.726586Z"
+      "source": "plugin",
+      "updatedAt": "2026-01-22T02:47:14.726484Z",
+      "backingPluginId": "plugin_011dadsiHX6d1vSxt7ELD9pY"
     },
     {
       "skillId": "import-memory",
@@ -122,8 +124,5 @@
       "source": "anthropic-example",
       "updatedAt": "2026-09-14T19:41:01.576619Z"
     }
-  ],
-  "pendingClaims": [
-    "26944:134344293877766193/docx"
   ]
 }
