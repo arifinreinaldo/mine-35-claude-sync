@@ -1,5 +1,5 @@
 {
-  "lastUpdated": 1790178221572,
+  "lastUpdated": 1790274192491,
   "skills": [
     {
       "skillId": "skill_014CginFM2dvfhHyAb27NpUN",
@@ -27,8 +27,9 @@
       "skillId": "skill_01Kpm7gpVGacuLU2f1e6kEeu",
       "name": "yu-portfolio-analyzer",
       "description": "Full portfolio analysis for Yu's multi-currency tracker (IDR/SGD/USD). Reads Tracker.xlsx with 13-sheet schema (Dashboard, Overview, SGYahoo, SGLongbridge, SGStockEvent, IDR-Mutual, IDR-Stock, US Moomoo, US Longbridge, US Webull, SnapshotLog, Snapshots), pulls live prices (FMP MCP + Yahoo fallback + Bareksa), computes returns/risk/drift, runs macro + micro research with equity-research sub-skills + Aschenbrenner trendline lens + Kevin Xu geopolitics lens, checks IPS compliance, tracks $1M milestone, generates currency-isolated rebalancing as Markdown. Trigger when Yu uploads a Tracker or asks to: analyze portfolio, check positions, rebalance, review investments, reconcile funds, check returns/risk, screen new ideas, or mentions Makmur/Maribank/LongBridge/moomoo/Webull/Stockbit/Bibit/Endowus/GXS/OCBC or the $1M goal.",
-      "source": "custom",
-      "updatedAt": "2026-05-15T06:21:16.379516Z"
+      "source": "plugin",
+      "updatedAt": "2026-05-15T06:21:16.379212Z",
+      "backingPluginId": "plugin_01QnM8Zb5VhBZNkkEo9xCRNn"
     },
     {
       "skillId": "skill_014qaZ8UXfurNM8r8azdt4gK",
