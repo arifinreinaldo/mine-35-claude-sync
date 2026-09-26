@@ -7,8 +7,8 @@
       "description": "Yu's weekly Saturday portfolio review routine — 30-minute structured check covering macro tape, portfolio drift, calendar look-ahead, decision queue, and logging. Use whenever Yu says \"saturday review\", \"weekly review\", \"weekly check\", \"saturday action\", \"what's the next action this week\", \"weekly routine\", or asks for the periodic portfolio status update. Outputs a Markdown checklist with current readings against IPS triggers, the next-week action queue, and a one-line log entry. Always runs against the live tracker (refresh first via yu-portfolio-analyzer or Google Sheet sync). Monthly extension fires on the last Saturday of the month with extra reconciliation tasks. Aligned with Yu's phased IPS (Phase 1 wedding-prep through Jan 2027, Phase 2 wife-arriving, Phase 3 steady-state).",
       "source": "plugin",
       "updatedAt": "2026-05-09T10:02:28.604631Z",
-      "creatorType": "user",
-      "backingPluginId": "plugin_01JaCrgwAnkoudNkB15ezeCQ"
+      "backingPluginId": "plugin_01JaCrgwAnkoudNkB15ezeCQ",
+      "creatorType": "user"
     },
     {
       "skillId": "skill_01Xb4dmRxQVhp8K9LpHpkJN8",
@@ -16,6 +16,7 @@
       "description": "Send a push notification through the CloudPush worker's FCM endpoint (POST /push-fcm), and resolve which fcm-topic to use before sending. Use this whenever Yu wants to send an FCM/push notification, wire up \"PushFCM\", set up or configure CloudPush FCM, migrate an ntfy push to FCM, or asks to \"notify me / push this / send an alert\" via the CloudPush worker. Trigger even when Yu says \"push this to my phone\" or names an existing ntfy topic and wants it delivered over FCM instead. Always resolve the topic (ask or reuse) before the first send in a session.",
       "source": "custom",
       "updatedAt": "2026-08-20T05:53:57.991333Z",
+      "backingPluginId": "plugin_01AXjZsDxgyyRfeGtRn5YLWm",
       "creatorType": "user"
     },
     {
@@ -32,8 +33,8 @@
       "description": "Full portfolio analysis for Yu's multi-currency tracker (IDR/SGD/USD). Reads Tracker.xlsx with 13-sheet schema (Dashboard, Overview, SGYahoo, SGLongbridge, SGStockEvent, IDR-Mutual, IDR-Stock, US Moomoo, US Longbridge, US Webull, SnapshotLog, Snapshots), pulls live prices (FMP MCP + Yahoo fallback + Bareksa), computes returns/risk/drift, runs macro + micro research with equity-research sub-skills + Aschenbrenner trendline lens + Kevin Xu geopolitics lens, checks IPS compliance, tracks $1M milestone, generates currency-isolated rebalancing as Markdown. Trigger when Yu uploads a Tracker or asks to: analyze portfolio, check positions, rebalance, review investments, reconcile funds, check returns/risk, screen new ideas, or mentions Makmur/Maribank/LongBridge/moomoo/Webull/Stockbit/Bibit/Endowus/GXS/OCBC or the $1M goal.",
       "source": "plugin",
       "updatedAt": "2026-05-15T06:21:16.379212Z",
-      "creatorType": "user",
-      "backingPluginId": "plugin_01QnM8Zb5VhBZNkkEo9xCRNn"
+      "backingPluginId": "plugin_01QnM8Zb5VhBZNkkEo9xCRNn",
+      "creatorType": "user"
     },
     {
       "skillId": "skill_014qaZ8UXfurNM8r8azdt4gK",
@@ -41,8 +42,8 @@
       "description": "Critique any existing skill by fanning out N parallel reviewer agents, each with a distinct lens and fresh context. Returns a ranked, deduplicated improvement list with severity. Triggers on phrases like \"review this skill\", \"iterate on the skill\", \"critique this skill\", \"find improvements in skill\", \"stress test the skill\", \"harden this skill\", \"skill audit\", \"skill review pass\". Designed for skill authors who want adversarial review without anchoring bias.",
       "source": "plugin",
       "updatedAt": "2026-05-13T09:09:56.085787Z",
-      "creatorType": "user",
-      "backingPluginId": "plugin_01YKACxKGCwc5Znf7GoER9rm"
+      "backingPluginId": "plugin_01YKACxKGCwc5Znf7GoER9rm",
+      "creatorType": "user"
     },
     {
       "skillId": "skill_01CB8t9DsVSASRHpcQ1LqHAV",
@@ -50,8 +51,8 @@
       "description": "Weekly scan to find small-cap stocks with elevated odds of a 15%+ pop in the next 3-6 weeks. Triggers on phrases like \"pre-pop scan\", \"scan for poppers\", \"find the next VELO\", \"pop candidates\", \"swing watchlist\", \"weekly screener\". Output is a ranked watchlist (top 10-15) with reasons, expected catalyst date, stop, and target. Designed for Yu — small position sizing, hard stops, swing horizon (not scalping).",
       "source": "plugin",
       "updatedAt": "2026-05-13T09:48:54.908992Z",
-      "creatorType": "user",
-      "backingPluginId": "plugin_016SDUZsJBTdoW4rBRomMSzo"
+      "backingPluginId": "plugin_016SDUZsJBTdoW4rBRomMSzo",
+      "creatorType": "user"
     },
     {
       "skillId": "skill_01BoaGKucVrsnEUReijUK7sW",
@@ -59,8 +60,8 @@
       "description": "Generate Flutter widgets following RAD (Reinaldo App Development) standards. Use when creating new StatefulWidgets with RAD prefix, mixins, mode-based layouts, and standardized parameter patterns. Triggers on requests like \"create a RAD widget\", \"build a new input field\", \"generate a dropdown widget\", or any Flutter widget creation for the flutter_rad project.",
       "source": "plugin",
       "updatedAt": "2026-01-22T02:47:14.726484Z",
-      "creatorType": "user",
-      "backingPluginId": "plugin_011dadsiHX6d1vSxt7ELD9pY"
+      "backingPluginId": "plugin_011dadsiHX6d1vSxt7ELD9pY",
+      "creatorType": "user"
     },
     {
       "skillId": "import-memory",
@@ -92,8 +93,8 @@
       "description": "Independent swing/position scanner for Yu. Ingests a swing_data.csv (produced on Yu's own machine by the bundled fetch.py, which pulls Twelve Data) and ranks US equities for high-relative-strength structural setups using public methodologies — Weinstein stage analysis, relative strength, volatility contraction, base breakouts. Use whenever Yu uploads a swing_data.csv or asks to scan for setups, find swing candidates, check relative strength, run the scanner, build a watchlist, or asks 'what looks strong', 'any setups', 'screen for me'. Applies Yu's IPS phase, losers-pattern exclusion, and buyer-not-trader discipline before any name reaches the output. No paid screener, no scraping — Yu's API key never leaves his machine.",
       "source": "plugin",
       "updatedAt": "2026-05-15T08:21:50.480042Z",
-      "creatorType": "user",
-      "backingPluginId": "plugin_01Bk2J6WgE8aGdmseaqhBYYy"
+      "backingPluginId": "plugin_01Bk2J6WgE8aGdmseaqhBYYy",
+      "creatorType": "user"
     },
     {
       "skillId": "skill-creator",
