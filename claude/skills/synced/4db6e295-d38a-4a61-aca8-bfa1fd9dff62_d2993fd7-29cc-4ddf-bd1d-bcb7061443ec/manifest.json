@@ -1,5 +1,5 @@
 {
-  "lastUpdated": 1790274192491,
+  "lastUpdated": 1790374860671,
   "skills": [
     {
       "skillId": "skill_014CginFM2dvfhHyAb27NpUN",
@@ -90,9 +90,10 @@
       "skillId": "skill_01TGi27Q31WWvEoSVDx5sXGs",
       "name": "swing-scanner",
       "description": "Independent swing/position scanner for Yu. Ingests a swing_data.csv (produced on Yu's own machine by the bundled fetch.py, which pulls Twelve Data) and ranks US equities for high-relative-strength structural setups using public methodologies — Weinstein stage analysis, relative strength, volatility contraction, base breakouts. Use whenever Yu uploads a swing_data.csv or asks to scan for setups, find swing candidates, check relative strength, run the scanner, build a watchlist, or asks 'what looks strong', 'any setups', 'screen for me'. Applies Yu's IPS phase, losers-pattern exclusion, and buyer-not-trader discipline before any name reaches the output. No paid screener, no scraping — Yu's API key never leaves his machine.",
-      "source": "custom",
-      "updatedAt": "2026-05-15T08:21:50.480201Z",
-      "creatorType": "user"
+      "source": "plugin",
+      "updatedAt": "2026-05-15T08:21:50.480042Z",
+      "creatorType": "user",
+      "backingPluginId": "plugin_01Bk2J6WgE8aGdmseaqhBYYy"
     },
     {
       "skillId": "skill-creator",
@@ -140,6 +141,14 @@
       "description": "Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, design, or other static piece. Create original visual designs, never copying existing artists' work to avoid copyright violations.",
       "source": "anthropic-example",
       "updatedAt": "2026-09-14T19:41:01.576619Z",
+      "creatorType": "anthropic"
+    },
+    {
+      "skillId": "google-workspace",
+      "name": "google-workspace",
+      "description": "Read this before the first Google Drive, Docs, Sheets or Slides connector call whenever the task creates or changes a Google file. Use this skill whenever the user wants to create or change a Google Doc, Sheet or Slides file in their Google Drive. Triggers include: a request that names Google Docs, Sheets, Slides or Drive and asks to make, edit, format, copy or rename a file; a docs.google.com link with a request to change that file, even a one-line fix or suggested edits; and any follow-up change to a Google file from earlier in the chat, even \"change it\" or \"add a tab\". Includes helper scripts for document positions, cell ranges and slide layout. However, if the user asks for a doc, deck or spreadsheet without naming Google, or gives a Google file only as source material for something new, use Claude's own output type instead. Do NOT use for read-only questions about a Google file, or for Word, Excel, PowerPoint or PDF files.",
+      "source": "anthropic-example",
+      "updatedAt": "2026-09-23T19:50:41.402985Z",
       "creatorType": "anthropic"
     }
   ]
