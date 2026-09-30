@@ -140,10 +140,7 @@ Applies to docs, wiki pages, code comments, commit bodies, issue reports. **Not*
 
 ## Workflow Skills (on demand — details live in the skill, not here)
 
-- `/plan-execution` — build a feature end to end: plan on Opus into a markdown spec, execute via Sonnet subagent, review via Opus subagent, verify in the main session. Calls `/research-gate` when the ground is unfamiliar.
-- `/research-gate` — grounded, cited planning brief before building a non-trivial feature (any stack).
-- `/my-review` — staged interactive review: architecture → quality → testing → performance → mobile.
-- `/feynman` — step-by-step plain-language breakdown; triggers on "feynman this" or explicit request.
+- `/plan-execution` — build a feature end to end: plan on Opus into a markdown spec, execute via Sonnet subagent, review via Opus subagent, verify in the main session.
 
 ## Self-Improvement Protocol (always on)
 
@@ -168,5 +165,5 @@ Anti-bloat — CLAUDE.md is a per-session token budget: prefer rewriting or tigh
 
 # Skill Activation Guards
 
-- **`domain-modeling` / `grill-with-docs`** (mattpocock subset) — these build a `CONTEXT.md` glossary + `docs/adr/`. Do **not** auto-activate them in a repo that already has an established domain-knowledge layer (an `llm_wiki/`, a docs wiki, or an existing `CONTEXT.md`/glossary) **or** a "don't proactively create docs" rule. In such a repo that existing layer is the single source of truth — read it for vocabulary, and never spin up a parallel `CONTEXT.md`/`docs/adr/` (DRY). They stay valid for greenfield repos with no knowledge layer, and via explicit `/grill-with-docs`. The `grilling` interview loop (no docs) is always fine.
+- **`domain-modeling`** (mattpocock subset) — this builds a `CONTEXT.md` glossary + `docs/adr/`. Do **not** auto-activate them in a repo that already has an established domain-knowledge layer (an `llm_wiki/`, a docs wiki, or an existing `CONTEXT.md`/glossary) **or** a "don't proactively create docs" rule. In such a repo that existing layer is the single source of truth — read it for vocabulary, and never spin up a parallel `CONTEXT.md`/`docs/adr/` (DRY). It stays valid for greenfield repos with no knowledge layer.
   - Concrete: `flutter_rad_pvmi` has `llm_wiki/` — defer to it there; do not generate `CONTEXT.md`/ADRs in that repo.
