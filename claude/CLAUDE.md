@@ -73,6 +73,16 @@ Before non-trivial code, also confirm: follows existing patterns (or breaks them
 - Secondary/Infra: Docker, AWS, Azure, Supabase, JavaScript/TypeScript, iOS/Swift
 - Scripting: Python for tooling/analysis
 
+## Cloudflare: wrangler → cf
+
+`wrangler` is being replaced by `cf` (beta since 2026-09; 18 months of wrangler maintenance after beta ends). Keep wrangler in existing projects until `cf` leaves beta or wrangler prints a redirect to `cf`. Then migrate:
+
+- `cf` needs Node >= 22. Put `C:\Users\Reinaldo\.config\herd\bin\nvm\v23.8.0` on PATH; the default Node 20 refuses.
+- Run `cf migrate <wrangler.jsonc> --dry-run` first. It needs a local wrangler >= 4.100.0, so run `npm install` in the project.
+- Migration writes `cloudflare.config.ts` and `wrangler.config.ts`. It does not migrate `.dev.vars`. Verify `.dev.vars` still loads in local dev.
+- Migrate on a `chore/migrate-to-cf` branch. Verify with the test suite and local dev. Never deploy as part of migration without asking.
+- Only known Cloudflare project: `Backend/cloudflare_notifier`. Source: blog.cloudflare.com/cloudflare-cf-cli-launch/.
+
 ## Long-Running Processes (Windows)
 
 - Never launch dev servers, ngrok, or backend daemons as background Bash processes. They die when the session or the tool call ends.
@@ -112,12 +122,13 @@ Brief the subagent like a colleague who just walked in — a spec or file path i
 
 ## Response Style
 
-- Be concise. Lead with the action or answer, not preamble.
-- For code changes: show the diff or the code, not a narrative explanation.
+**Hard cap: 3 short paragraphs, or the equivalent in bullets.** Answer exactly what was asked — nothing adjacent, no options I didn't ask for. Exceed the cap only when I ask for a report, walkthrough, plan, or per-phase notes.
+
+- Lead with the answer or the action. No preamble, no filler, no restating my question back to me.
+- Code changes: show the diff. Skip the narrative around it.
 - Don't summarize what you just did — I can read the output.
-- Skip filler phrases.
-- Steps I must execute manually: numbered, each bounded (no nested "and thens"), with a time estimate.
-- Lists ≤5 items, ranked; split if longer.
+- Process checklists (4 Invariables, the ladder, ambiguity triage, falsifiability) are thinking, not output. Surface only the ones that actually fail.
+- Steps I must run: numbered, bounded, with a time estimate. Lists ≤5 items, ranked.
 
 ### Technical prose — ASD-STE100 basics
 
