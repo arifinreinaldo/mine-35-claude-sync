@@ -12,6 +12,7 @@ override.
 | Phase | Who | Output |
 |---|---|---|
 | 1. Plan | Opus — main session | `docs/<feature>-spec.md` |
+| 1a. UI design (major UI only) | Opus — main session, I choose | `docs/<feature>-directions.html` |
 | 1b. Spec review | Opus + Fable subagents | amended spec |
 | 2. Execute | Sonnet subagent | code + a passing check |
 | 3. Review | Opus + Fable subagents | findings against the spec |
@@ -38,6 +39,12 @@ The spec carries, at minimum:
 Counterintuitive details are the whole point of writing it down. Anything where a competent guess
 lands wrong (`owner_id 1` means nobody; keys are strings not ints; the field is a list not a dict)
 gets stated explicitly with where it was verified. Phase 2 will guess otherwise, and guess wrong.
+
+## Phase 1a — UI design gate (major UI changes only)
+
+For a new screen, a redesign, or a new visual direction, run `ui-design.md` before writing the
+spec: tone scores, distinct directions, one comparison page, and my choice. The chosen direction
+goes into the spec. Skip for tweaks and for screens that syscon config already renders.
 
 ## Phase 1b — Spec review
 
@@ -69,6 +76,8 @@ round up.
 Once Phase 2 reports, follow `code-review.md`: two-model review plus a blast-radius pass for
 contract/3+ file/live-state/security changes, one Opus reviewer otherwise. Give reviewers the spec
 path and the changed files, and have them review **against the spec** — not against their own taste.
+
+For major UI changes, also apply the reality-check and reduction pass in `ui-design.md`.
 
 The single-reviewer checklist, in order (`code-review.md` extends it):
 
@@ -106,6 +115,8 @@ Also skip Phase 2 when the build is small enough that briefing a subagent costs 
 
 ## Changelog
 
+- 2026-09-30 — Added Phase 1a UI design gate for major UI changes, adapted from oil-oil/oil-ui
+  (tone scores, differentiated directions, comparison page, reduction pass). See `ui-design.md`.
 - 2026-09-30 — Added Phase 1b (spec review) and upgraded Phase 3 to two-model review + blast-radius
   pass, adapted from pstack `interrogate`/`blast-radius`. Gated by spec size; see `spec-review.md`,
   `code-review.md`.
