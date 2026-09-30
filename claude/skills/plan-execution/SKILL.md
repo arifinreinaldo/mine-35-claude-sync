@@ -12,8 +12,9 @@ override.
 | Phase | Who | Output |
 |---|---|---|
 | 1. Plan | Opus — main session | `docs/<feature>-spec.md` |
+| 1b. Spec review | Opus + Fable subagents | amended spec |
 | 2. Execute | Sonnet subagent | code + a passing check |
-| 3. Review | Opus subagent | findings against the spec |
+| 3. Review | Opus + Fable subagents | findings against the spec |
 | 4. Verify | Opus — main session | the check, re-run |
 
 Override any row when I name a different model ("fable review", "haiku for the boring part").
@@ -38,6 +39,12 @@ Counterintuitive details are the whole point of writing it down. Anything where 
 lands wrong (`owner_id 1` means nobody; keys are strings not ints; the field is a list not a dict)
 gets stated explicitly with where it was verified. Phase 2 will guess otherwise, and guess wrong.
 
+## Phase 1b — Spec review
+
+Before I confirm the spec, attack its technical decisions with independent reviewers. Follow
+`spec-review.md` (two models for contract/3+ file/live-state/security specs, one Opus reviewer
+otherwise, skipped for small no-contract work). Amend the spec for the findings I accept.
+
 Confirm the spec with me before dispatching. Phase 2 is the expensive one to redo.
 
 ## Phase 2 — Execute
@@ -59,10 +66,11 @@ round up.
 
 ## Phase 3 — Review
 
-Dispatch an Opus subagent once Phase 2 reports. Give it the spec path and the changed files, and
-ask it to review **against the spec** — not against its own taste.
+Once Phase 2 reports, follow `code-review.md`: two-model review plus a blast-radius pass for
+contract/3+ file/live-state/security changes, one Opus reviewer otherwise. Give reviewers the spec
+path and the changed files, and have them review **against the spec** — not against their own taste.
 
-What it looks for, in order:
+The single-reviewer checklist, in order (`code-review.md` extends it):
 
 1. Contract drift — the code does something the spec did not say
 2. Silent gaps — a spec requirement with no code behind it
@@ -98,5 +106,8 @@ Also skip Phase 2 when the build is small enough that briefing a subagent costs 
 
 ## Changelog
 
+- 2026-09-30 — Added Phase 1b (spec review) and upgraded Phase 3 to two-model review + blast-radius
+  pass, adapted from pstack `interrogate`/`blast-radius`. Gated by spec size; see `spec-review.md`,
+  `code-review.md`.
 - 2026-09-03 — Added Known Blockers: Plan-type subagent has no Write tool; use general-purpose +
   model override when the planner runs as a subagent.
