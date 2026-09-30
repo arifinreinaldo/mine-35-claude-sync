@@ -1,6 +1,0 @@
-interface:
-  display_name: "Xiaohei Illustrations"
-  short_description: "Weird, clean, hand-drawn article illustrations starring the Xiaohei IP"
-  default_prompt: "Use $xiao-image to design and generate a set of absurd Xiaohei body illustrations for this article."
-policy:
-  allow_implicit_invocation: true
