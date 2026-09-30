@@ -21,7 +21,7 @@ Phase 4 never delegates.
 
 ## Phase 1 — Plan
 
-Ground the design first (`/research-gate` if the feature is unfamiliar), then write the spec **to a
+Ground the design first, then write the spec **to a
 file**, not into chat.
 
 Chat does not survive a subagent boundary. The spec is the only channel to Phase 2, so write it for

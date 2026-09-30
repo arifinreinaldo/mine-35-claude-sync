@@ -1,0 +1,142 @@
+# swing-scanner universe — one ticker per line, '#' = comment / section header.
+# Edit freely: add names you're tracking, remove what you don't care about.
+# Keep it ~150-300 tickers. SPY + RSP are added automatically as benchmarks.
+# Seeded 2026-05-15.
+
+# --- Yu's current US holdings (so the scan doubles as an add-on-strength check) ---
+META
+NVO
+SOFI
+IREN
+SOUN
+BMNR
+IAU
+GLDM
+
+# --- AI infrastructure / power / datacenter ---
+NVDA
+AVGO
+AMD
+LRCX
+AMAT
+ASML
+MU
+TSM
+ANET
+VRT
+CRDO
+ALAB
+SMCI
+MRVL
+ARM
+DELL
+ORCL
+NOW
+PANW
+CRWD
+NET
+SNOW
+PLTR
+
+# --- Photonics / silicon photonics CPO / InP substrate chokepoint ---
+COHR
+LITE
+AAOI
+MTSI
+LWLG
+TSEM
+AXTI
+GLW
+VSH
+POET
+
+# --- Space / LEO infrastructure / defense ---
+RKLB
+LUNR
+SATL
+RDW
+DMRC
+LMT
+RTX
+NOC
+GD
+BWXT
+BAH
+
+# --- Energy / nuclear / power ---
+CEG
+VST
+NRG
+TLN
+SMR
+OKLO
+NNE
+CCJ
+GEV
+PWR
+ETN
+
+# --- Solid-state batteries / clean energy / EV ---
+MVST
+QS
+ENPH
+FSLR
+PLUG
+TSLA
+
+# --- Materials / gold miners / commodities ---
+NEM
+GOLD
+AEM
+HL
+FCX
+SCCO
+ALB
+
+# --- Healthcare / pharma ---
+LLY
+UNH
+ISRG
+VRTX
+REGN
+ABBV
+TMO
+
+# --- Mega-cap / quality compounders ---
+AAPL
+MSFT
+GOOGL
+AMZN
+NFLX
+COST
+WMT
+V
+MA
+JPM
+GE
+CAT
+BKNG
+
+# --- Energy majors / oil ---
+XOM
+CVX
+COP
+SLB
+HAL
+
+# --- Fintech / financials ---
+HOOD
+COIN
+AXP
+GS
+
+# --- Other momentum / leaders to watch ---
+TXN
+CSCO
+EVC
+RELY
+VG
+CRM
+UBER
+ABNB
+DASH
