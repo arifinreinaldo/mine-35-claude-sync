@@ -83,6 +83,14 @@ Before non-trivial code, also confirm: follows existing patterns (or breaks them
 - Migrate on a `chore/migrate-to-cf` branch. Verify with the test suite and local dev. Never deploy as part of migration without asking.
 - Only known Cloudflare project: `Backend/cloudflare_notifier`. Source: blog.cloudflare.com/cloudflare-cf-cli-launch/.
 
+## Browser Tool Choice
+
+Pick the first tier that fits; escalate only when it cannot do the job.
+
+1. **`playwright-cli`** — default for testing, verifying my own apps, scraping, and any scripted browser task.
+2. **Claude in Chrome** (`mcp__claude-in-chrome__*`) — only when the task needs my real logged-in browser session (SSO, cookies, extensions) or I must watch/steer the page live.
+3. **Obscura** (local Rust headless browser, CDP + MCP) — for bulk or parallel scraping where Chromium RAM/startup is the bottleneck. It is young (limited JS/CDP coverage): test the target page first. Before use, check it is installed (`where obscura`). If missing, stop and prompt me to install it — never install it silently, never fall back without asking. Kitesurf (Cloudflare-hosted beta) is not used.
+
 ## Long-Running Processes (Windows)
 
 - Never launch dev servers, ngrok, or backend daemons as background Bash processes. They die when the session or the tool call ends.
