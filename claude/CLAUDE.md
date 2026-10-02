@@ -98,6 +98,12 @@ Pick the first tier that fits; escalate only when it cannot do the job.
 - For services, use NSSM only after you verify the target account has the user-scoped dependencies (Python packages, Playwright browsers). If you cannot verify, default to the `.bat` launcher.
 - Before you start any server, kill the orphaned listeners on the target port (IPv4 and IPv6 bindings) and confirm the port is free.
 
+## PowerShell Native-Command Quoting (Windows)
+
+- PowerShell 7 passes `'""'` to a native exe as the two literal characters `""`, not an empty string. Pass an empty argument as `''` or `""`.
+- Example: `ssh-keygen -N '""'` made a key whose passphrase was literally `""`, and Voltius kept asking for one. Fix: `ssh-keygen -p`, old passphrase `""`, new passphrase empty.
+- Generate SSH keys with `-N ''`, then verify with `ssh-keygen -y -P '' -f <key>` before you hand the key over.
+
 ## API Standard (backends)
 
 Backends exposing JSON endpoints follow one response contract: success `{message, data}`; errors `{message, errors, retryable, request_id}` with a real HTTP status code (**never 200**); `retryable` true only on 429/503; `X-Request-Id` on every response; `Retry-After` on 429/503; `Idempotency-Key` on harmful mutations. Canonical spec: `~/.claude/directives/api-standard.md`.
