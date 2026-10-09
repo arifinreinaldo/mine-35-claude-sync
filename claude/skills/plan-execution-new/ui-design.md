@@ -1,10 +1,10 @@
-# UI Design Gate (step 1a + step 6 addendum)
+# UI Design Gate (step 1 + step 8 addendum)
 
 Adapted from oil-oil/oil-ui. Use only for **major UI changes**: a new screen, a redesign, a new
 visual direction. Skip for a tweak, a new field, or a config-driven form that syscon already renders.
 Taste decisions belong to me. Execution belongs to the AI.
 
-## Step 1a — Before the spec
+## Step 1 — Before the spec
 
 1. **Set the tone.** Score five dimensions, each with one line of reasoning. No adjectives like
    "premium" or "clean".
@@ -25,15 +25,15 @@ Taste decisions belong to me. Execution belongs to the AI.
    a desktop/mobile toggle, and keyboard navigation. Build it with `impeccable` or `frontend-design`.
    Write to `docs/<feature>-directions.html`.
 6. **I choose.** I pick a direction and give feedback. Do not sand the directions into one middle
-   option. Do not start step 1b before the user chooses.
+   option. Do not start step 2 (planning) before the user chooses.
 
 The spec then carries: the chosen direction, its tone scores, its skeleton, the type and color
 decisions, and the states the screen must show (empty, loading, error, full).
 Do not build a new design system for one tweak.
 
-## Step 6 addendum — Reality check and reduction
+## Step 8 addendum — Reality check and reduction
 
-Add these to the reviewer brief and to the verify step (5).
+Add these to the reviewer brief and to the verify step (step 7).
 
 - **Real render.** Run the screen at real viewport sizes, desktop and mobile, at 100% and 200%
   zoom. A scaled-down preview or added decoration does not count.

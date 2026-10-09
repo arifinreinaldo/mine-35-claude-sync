@@ -1,4 +1,4 @@
-# Code Review (step 5)
+# Code Review (step 8)
 
 Adapted from pstack `interrogate` + `blast-radius`. Review is against the spec first, taste never.
 
@@ -14,7 +14,7 @@ Launch in ONE message, `run_in_background: true`:
 - `pipeline-reviewer` (Opus) — the order below.
 - `superexplorer` (Opus, high) — the blast-radius pass. Same trigger only.
 
-The prompt carries: spec path, changed files (or `git diff <base>...HEAD`), the verbatim output of
+The prompt carries: spec path, changed files (`git diff <base>` plus `git status --short`; the executor never commits and new files are untracked), the verbatim output of
 the verification step, and the order below. Style the spec did not ask about is noise — say so.
 
 ## Order
@@ -35,10 +35,11 @@ Find what the change breaks beyond the diff, where grep stops: JSON an API retur
 wire formats, feature flags, code three hops away.
 
 - Name the ONE fact the change is safe because of.
-- Prove it by running real code (a small script or test that fails loud if wrong). If it cannot be
-  proven cheaply, mark it **unproven** — never write it up as settled.
+- Prove it with read-only evidence: grep and call-chain traces, `git blame`/`git log`, or existing
+  tests and commands that write nothing. The reviewer cannot create files. If it cannot be proven
+  this way, mark it **unproven** — never write it up as settled.
 - Return: what it does, the safety fact and how far it was proven, real risks with `file:line`,
-  what was checked and cleared, and the cheapest repro before merge.
+  what was checked and cleared, and the cheapest repro to run before merge.
 
 ## Synthesize (main session)
 

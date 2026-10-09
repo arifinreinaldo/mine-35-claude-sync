@@ -1,4 +1,4 @@
-# Spec Review (step 1b)
+# Spec Review (step 3)
 
 Adapted from pstack `interrogate` + `blast-radius`. Runs after the spec is saved, before the user
 confirms it and before any execution.
@@ -35,9 +35,16 @@ Review the spec, not the code. Read the code the spec points at before judging i
 Return format: per finding — the claim, the spec section or `file:line` that shows it, and
 severity (blocks / weakens / nit). Trace failures step by step; "could be wrong" alone is noise.
 
+## Ponytail pass (main session)
+
+Run on every saved spec, even when the Opus review is skipped. Invoke the `ponytail:ponytail` skill and
+apply it to the spec: is this the smallest working solution? Which steps can be deleted, merged, or
+replaced by something that already exists? Add its findings to the buckets below. Unverified: the
+skill is written for code, so judge whether each finding fits a plan.
+
 ## Synthesize (main session)
 
 Bucket each finding: **Act on** (would block a real PR), **Consider** (tradeoff for the user),
 **Noted** (valid, low impact), **Dismissed** (wrong or missing context — one-line why).
 Present the buckets to the user. Do not auto-apply. Send accepted "Act on" items back to
-`pipeline-planner` to amend the spec, then continue to "confirm the spec".
+`pipeline-planner` to amend the spec, then continue to "Confirm".
