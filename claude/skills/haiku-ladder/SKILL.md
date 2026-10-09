@@ -33,11 +33,11 @@ Log the rung where each task stopped (one line in the reply). If >30% of tasks l
 
 Haiku never decides what to change.
 
-1. Plan first: Opus (main session or `model: opus` subagent) writes exact files, exact edits, and one verification command. No plan = no Haiku edit; use `/plan-execution` or edit directly.
+1. Plan first: an Opus subagent (`pipeline-planner`) writes exact files, exact edits, and one verification command. No plan = no Haiku edit; use `/plan-execution-new` or edit directly.
 2. Spawn `model: haiku` with the plan. Rules in the brief: apply literally; if a file differs from what the plan expects, STOP and report, never improvise; no extra edits.
 3. The main session runs the verification command and shows the output. Haiku does not judge its own edit.
-4. Failure goes back to Opus to fix the PLAN. Do not escalate the edit to a bigger model to redo it.
-5. Judgment needed while editing? Hand the plan to Sonnet instead (`/plan-execution`).
+4. Failure: if the plan was wrong, Opus amends the plan. If the plan was right and Haiku could not apply it, escalate the edit Haiku -> Sonnet -> Opus with the same verification gate. Log each rung.
+5. Judgment needed while editing? Hand the plan to Sonnet instead (`/plan-execution-new`).
 
 ## Notes
 

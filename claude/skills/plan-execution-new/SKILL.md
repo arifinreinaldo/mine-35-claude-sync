@@ -1,5 +1,5 @@
 ---
-name: sonnet-pipeline
+name: plan-execution-new
 description: Use for a non-trivial feature or multi-file change when the main session is Sonnet - Opus plans (pipeline-planner), Haiku or Sonnet executes per step by size and label, Opus reviews (pipeline-reviewer). Skip for trivial edits and for bug diagnosis.
 ---
 
@@ -9,7 +9,7 @@ Main session (Sonnet) orchestrates. Use the Agent tool's `model:` override. Neve
 
 ## Flow
 
-1. **Plan** — spawn `pipeline-planner` (Opus). Give it the goal, constraints, and the spec path (`docs/<feature>-spec.md`). Read the spec.
+1. **Plan** — spawn `pipeline-planner` (Opus). Give it the goal and constraints. It returns the spec as text. Save it to `docs/<feature>-spec.md` yourself, then read it.
 2. **Route** — assign every step a model with the table below.
 3. **Execute** — spawn `pipeline-executor` with `model:` per group. Batch adjacent steps with the same model into one call.
 4. **Verify** — run each step's `verify` and the spec's overall `verify` yourself. Show the output.
