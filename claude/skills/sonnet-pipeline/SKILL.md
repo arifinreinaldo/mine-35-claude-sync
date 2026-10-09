@@ -36,7 +36,6 @@ End the run with one line per step: step, model used, applied/stopped/mislabel. 
 
 ## Known Blockers
 
-- `CLAUDE_CODE_SUBAGENT_MODEL`, if set, may override the per-call `model:`. Leave it unset.
 - Planner overrates steps as `mechanical`: the log above is the detector.
 
 ## Changelog

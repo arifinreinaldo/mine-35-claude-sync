@@ -39,10 +39,11 @@ Haiku never decides what to change.
 4. Failure goes back to Opus to fix the PLAN. Do not escalate the edit to a bigger model to redo it.
 5. Judgment needed while editing? Hand the plan to Sonnet instead (`/plan-execution`).
 
-## Known Blockers
+## Notes
 
-- Unverified: `CLAUDE_CODE_SUBAGENT_MODEL` may override the per-call `model:`. If a spawned agent reports the wrong model, unset the env var.
+- The user agent `Explore` (`model: haiku`) replaces the built-in. Rung 1 uses it. A per-call `model:` still wins, so rungs 2 and 3 work.
+- Rung 3 may use `superexplorer` (Opus, high) instead of a plain `model: opus` spawn.
 
 ## Changelog
 
-- 2026-10-09: created.
+- 2026-10-09: created. Removed the `CLAUDE_CODE_SUBAGENT_MODEL` blocker: per-call `model:` outranks it since v2.1.251.
