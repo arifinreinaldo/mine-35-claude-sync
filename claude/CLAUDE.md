@@ -36,7 +36,6 @@ Before non-trivial code, also confirm: follows existing patterns (or breaks them
 
 - Restate the goal as a verifiable success criterion (the command/test/observation that proves "done") before executing.
 - Self-verify: run that check, iterate until it passes. Name the exact command and show its output — `flutter analyze`, `go build ./...`, the test suite, Newman, or a live browser/device check. Evidence before claims — injected session history and memory are reference, not current state; anything older than ~72h gets re-verified before you act on it.
-- Do not trust a subagent's "verified" claim. Re-run the check yourself.
 - A background compile that exits 0 without fresh output is NOT a pass. Check the timestamps on the build artifacts.
 - Slow checks (`flutter analyze`, full builds, Newman): in Herdr (`$HERDR_ENV` = 1), run them in a pane instead of a blocking Bash call — `pane split --no-focus` -> `pane run` -> `pane wait-output --regex` -> `pane read`; the pane output is the evidence, and you see it too. Outside Herdr, run them in the foreground and show the output.
 - Report partial success honestly: say which parts you verified and which you did not.
@@ -73,23 +72,12 @@ Before non-trivial code, also confirm: follows existing patterns (or breaks them
 - Secondary/Infra: Docker, AWS, Azure, Supabase, JavaScript/TypeScript, iOS/Swift
 - Scripting: Python for tooling/analysis
 
-## Cloudflare: wrangler → cf
-
-`wrangler` is being replaced by `cf` (beta since 2026-09; 18 months of wrangler maintenance after beta ends). Keep wrangler in existing projects until `cf` leaves beta or wrangler prints a redirect to `cf`. Then migrate:
-
-- `cf` needs Node >= 22. Put `C:\Users\Reinaldo\.config\herd\bin\nvm\v23.8.0` on PATH; the default Node 20 refuses.
-- Run `cf migrate <wrangler.jsonc> --dry-run` first. It needs a local wrangler >= 4.100.0, so run `npm install` in the project.
-- Migration writes `cloudflare.config.ts` and `wrangler.config.ts`. It does not migrate `.dev.vars`. Verify `.dev.vars` still loads in local dev.
-- Migrate on a `chore/migrate-to-cf` branch. Verify with the test suite and local dev. Never deploy as part of migration without asking.
-- Only known Cloudflare project: `Backend/cloudflare_notifier`. Source: blog.cloudflare.com/cloudflare-cf-cli-launch/.
-
 ## Browser Tool Choice
 
 Pick the first tier that fits; escalate only when it cannot do the job.
 
 1. **`playwright-cli`** — default for testing, verifying my own apps, scraping, and any scripted browser task.
 2. **Claude in Chrome** (`mcp__claude-in-chrome__*`) — only when the task needs my real logged-in browser session (SSO, cookies, extensions) or I must watch/steer the page live.
-3. **Obscura** (local Rust headless browser, CDP + MCP) — for bulk or parallel scraping where Chromium RAM/startup is the bottleneck. It is young (limited JS/CDP coverage): test the target page first. Before use, check it is installed (`where obscura`). If missing, stop and prompt me to install it — never install it silently, never fall back without asking. Kitesurf (Cloudflare-hosted beta) is not used.
 
 ## Long-Running Processes (Windows)
 
@@ -110,30 +98,23 @@ Backends exposing JSON endpoints follow one response contract: success `{message
 
 On `/init` (or scaffolding) in a project that exposes JSON endpoints: generate that project's `docs/api-standard.md` from the canonical spec — tailored to the stack, extending any existing response convention — and add to the project CLAUDE.md: "When creating or generating any JSON API endpoint, follow docs/api-standard.md." Skip for HTML-only / static projects.
 
-## Postman Collections
-
-Self-contained at project level: the collection lives in the repo it exercises (`postman/`, committed — never only in a personal Postman workspace), and every variable it uses is declared in that collection's own `variable` block with a working default. Importing that one file runs green with no environment selected. Secrets stay empty there (collections get committed) — pass at run time with `--env-var`. An environment file is optional and wins when selected (Postman resolves environment → collection); namespace variables per feature (`paymongo*`, `duitNow*`) so one shared environment can serve every collection.
-
-In scripts: read with `pm.variables.get()`, never `pm.environment.get()` (environment scope only → `undefined` standalone); write with `pm.environment.set()` (newman gives an ephemeral environment even without `-e`); declare with `var` inside an IIFE, never top-level `const`/`let` (newman shares one sandbox scope across requests → "already been declared"). Sign a webhook body by building it in a pre-request script and sending only `{{thatVar}}` — a body containing `{{...}}` is substituted after signing, so the bytes signed stop matching the bytes sent. A `{{var}}` inside a script stays literal — Postman substitutes only the request URL, headers, and body. Resolve it with `pm.variables.replaceIn('{{var}}')`; never write `{{var}}` into a regex or a comparison. Verify with `newman run` **both** with and without `-e`; each of these fails in only one of the two modes.
-
 ## Model & Effort Routing
 
 If a better-fit model exists for the task, say so in one line at the top with the switch command — suggest, never claim to have switched (you can't).
 
 | Task | Model | Effort |
 |---|---|---|
-| Debugging, root cause, ambiguous/high-blast-radius planning | Opus 5 | max |
-| Planning — clear scope | Opus 5 | xhigh |
-| Execution — plan already decided | Sonnet 5 | high |
-| Review | Opus 5 or Fable 5 | high |
-| Trivial — rename, typo, tooltip | Haiku 4.5 | high |
+| Debugging, root cause, ambiguous/high-blast-radius planning | Opus 5.5 | max |
+| Planning — clear scope | Opus 5.5 | xhigh |
+| Execution — plan already decided | Sonnet 5.5 | high |
+| Review | Opus 5.5 or Fable 5.1 | high |
+| Trivial — rename, typo, tooltip | Haiku 5.5 | high |
 
-Model IDs: `claude-opus-5`, `claude-sonnet-5`, `claude-fable-5`, `claude-haiku-4-5-20251001`.
+Model IDs: `claude-opus-5-5`, `claude-sonnet-5-5`, `claude-fable-5-1`, `claude-haiku-5-5`.
 
 **Auto-routing.** Once I state a phase→model split for a piece of work ("plan opus, execute sonnet, fable review"), it stands for that whole piece of work — don't ask me to switch again. Dispatch each phase to a subagent with the Agent tool's `model:` override and keep the result; the main session stays where it is. Stating the split IS authorization to use the Agent tool for those phases. In Herdr, a long execute phase may instead run as a real CLI in a pane — `herdr agent start <name> --kind claude --pane <id> -- --model sonnet`, then `agent prompt --wait` and `agent read`. It is visible and interruptible, but it is a separate instance drawing on the same plan limits: one at a time, Sonnet, close the pane when done. Only suggest `/model` when the *main session itself* is on the wrong model for what I'm asking right now.
 
-Brief the subagent like a colleague who just walked in — a spec or file path it can work from cold, not "see above." Subagent context does not inherit the conversation unless dispatched as `fork`. Per Goal-Driven Execution, re-run the check yourself; a subagent's "verified" is a claim, not evidence.
-
+Brief the subagent like a colleague who just walked in — a spec or file path it can work from cold, not "see above." Subagent context does not inherit the conversation unless dispatched as `fork`.
 ## Response Style
 
 **Hard cap: 3 short paragraphs, or the equivalent in bullets.** Answer exactly what was asked — nothing adjacent, no options I didn't ask for. Exceed the cap only when I ask for a report, walkthrough, plan, or per-phase notes.
@@ -151,10 +132,6 @@ Applies to docs, wiki pages, code comments, commit bodies, issue reports. **Not*
 - One idea per sentence: ≤20 words procedural, ≤25 descriptive; ≤6 sentences per paragraph, one topic each.
 - Active voice, name the actor; simple tenses only (no present perfect, no `-ing` verb forms); ≤3-word noun clusters; don't drop articles.
 - One term per concept, never varied for variety — same for identifiers. Code names (class, table, column) are the glossary: use them verbatim, never paraphrased.
-
-## Workflow Skills (on demand — details live in the skill, not here)
-
-- `/plan-execution` — build a feature end to end: plan on Opus into a markdown spec, execute via Sonnet subagent, review via Opus subagent, verify in the main session.
 
 ## Self-Improvement Protocol (always on)
 
