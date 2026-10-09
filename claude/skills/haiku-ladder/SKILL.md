@@ -11,7 +11,7 @@ Use the Agent tool's `model:` override. Never ask for a `/model` switch.
 
 Fire this skill when ANY of these is true, before reading files yourself:
 
-- The question is existence or location: "is there", "where is", "which files", "who calls", "does X exist".
+- The question is existence or location: "is there", "where is", "which files", "who calls", "does X exist", "find X".
 - You are about to run 3+ Grep/Read calls only to collect context for a later decision.
 - The user says "explore", "gather context", "sweep", "check the docs for", "haiku", "ladder".
 - A plan already exists (spec file or Opus plan) AND every edit in it is mechanical.
