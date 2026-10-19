@@ -1,6 +1,6 @@
 ---
 name: karpathy-brain
-description: Bootstrap and maintain an `llm_wiki/` "memory palace" for a coding project (Karpathy LLM-wiki pattern), so searches route through a map instead of blind grep. Use when initializing a project's wiki/memory palace, wiring its local CLAUDE.md to consult the wiki first, or updating + committing the wiki after a code change. Operations: init, update, lint.
+description: "Bootstrap and maintain an `llm_wiki/` \"memory palace\" for a coding project (Karpathy LLM-wiki pattern), so searches route through a map instead of blind grep. Use when initializing a project's wiki/memory palace, wiring its local CLAUDE.md to consult the wiki first, or updating + committing the wiki after a code change. Operations: init, update, lint."
 ---
 
 # karpathy-brain
