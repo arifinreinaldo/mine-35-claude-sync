@@ -62,7 +62,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "python \"C:/Users/Reinaldo/.claude/statusline/herdr-usage.py\""
+    "command": "sh -c 'f=\"$HOME/.claude/statusline/herdr-usage.sh\"; if [ -f \"$f\" ]; then exec sh \"$f\"; else python \"C:/Users/Reinaldo/.claude/statusline/herdr-usage.py\"; fi'"
   },
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true,

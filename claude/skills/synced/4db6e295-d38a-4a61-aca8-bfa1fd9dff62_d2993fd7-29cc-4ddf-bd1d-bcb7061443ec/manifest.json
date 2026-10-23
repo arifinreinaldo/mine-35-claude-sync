@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "lastUpdated": 1792634530218,
+=======
+  "lastUpdated": 1792760314427,
+>>>>>>> 1efaeb5 (chore: auto-sync 22 claude config file(s))
   "skills": [
     {
       "skillId": "skill_01Xb4dmRxQVhp8K9LpHpkJN8",
@@ -111,7 +115,19 @@
       "name": "web-artifacts-builder",
       "description": "Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.",
       "source": "anthropic-example",
+<<<<<<< HEAD
       "updatedAt": "2026-09-14T19:41:01.557439Z"
+=======
+      "updatedAt": "2026-10-14T14:41:49.960676Z"
+    },
+    {
+      "skillId": "skill_01TGi27Q31WWvEoSVDx5sXGs",
+      "name": "swing-scanner",
+      "description": "Independent swing/position scanner for Yu. Ingests a swing_data.csv (produced on Yu's own machine by the bundled fetch.py, which pulls Twelve Data) and ranks US equities for high-relative-strength structural setups using public methodologies — Weinstein stage analysis, relative strength, volatility contraction, base breakouts. Use whenever Yu uploads a swing_data.csv or asks to scan for setups, find swing candidates, check relative strength, run the scanner, build a watchlist, or asks 'what looks strong', 'any setups', 'screen for me'. Applies Yu's IPS phase, losers-pattern exclusion, and buyer-not-trader discipline before any name reaches the output. No paid screener, no scraping — Yu's API key never leaves his machine.",
+      "source": "plugin",
+      "updatedAt": "2026-05-15T08:21:50.480042Z",
+      "backingPluginId": "plugin_01Bk2J6WgE8aGdmseaqhBYYy"
+>>>>>>> 1efaeb5 (chore: auto-sync 22 claude config file(s))
     },
     {
       "skillId": "skill-creator",
