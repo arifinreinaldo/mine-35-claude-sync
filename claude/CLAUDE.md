@@ -119,6 +119,7 @@ Brief the subagent like a colleague who just walked in — a spec or file path i
 
 **Hard cap: 3 short paragraphs, or the equivalent in bullets.** Answer exactly what was asked — nothing adjacent, no options I didn't ask for. Exceed the cap only when I ask for a report, walkthrough, plan, or per-phase notes.
 
+- Canary: start every reply with "Mr.Tjhay —". If a reply omits it, tell me the context is degrading and suggest a fresh session.
 - Lead with the answer or the action. No preamble, no filler, no restating my question back to me.
 - Code changes: show the diff. Skip the narrative around it.
 - Don't summarize what you just did — I can read the output.
