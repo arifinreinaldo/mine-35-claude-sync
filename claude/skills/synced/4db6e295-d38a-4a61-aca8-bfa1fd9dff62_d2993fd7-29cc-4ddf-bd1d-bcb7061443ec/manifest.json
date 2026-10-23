@@ -1,66 +1,6 @@
 {
-<<<<<<< HEAD
-  "lastUpdated": 1792634530218,
-=======
-  "lastUpdated": 1792760314427,
->>>>>>> 1efaeb5 (chore: auto-sync 22 claude config file(s))
+  "lastUpdated": 1792760917664,
   "skills": [
-    {
-      "skillId": "skill_01Xb4dmRxQVhp8K9LpHpkJN8",
-      "name": "pushfcm",
-      "description": "Send a push notification through the CloudPush worker's FCM endpoint (POST /push-fcm), and resolve which fcm-topic to use before sending. Use this whenever Yu wants to send an FCM/push notification, wire up \"PushFCM\", set up or configure CloudPush FCM, migrate an ntfy push to FCM, or asks to \"notify me / push this / send an alert\" via the CloudPush worker. Trigger even when Yu says \"push this to my phone\" or names an existing ntfy topic and wants it delivered over FCM instead. Always resolve the topic (ask or reuse) before the first send in a session.",
-      "source": "plugin",
-      "updatedAt": "2026-08-20T05:53:57.991333Z",
-      "backingPluginId": "plugin_01AXjZsDxgyyRfeGtRn5YLWm"
-    },
-    {
-      "skillId": "skill_01TGi27Q31WWvEoSVDx5sXGs",
-      "name": "swing-scanner",
-      "description": "Independent swing/position scanner for Yu. Ingests a swing_data.csv (produced on Yu's own machine by the bundled fetch.py, which pulls Twelve Data) and ranks US equities for high-relative-strength structural setups using public methodologies — Weinstein stage analysis, relative strength, volatility contraction, base breakouts. Use whenever Yu uploads a swing_data.csv or asks to scan for setups, find swing candidates, check relative strength, run the scanner, build a watchlist, or asks 'what looks strong', 'any setups', 'screen for me'. Applies Yu's IPS phase, losers-pattern exclusion, and buyer-not-trader discipline before any name reaches the output. No paid screener, no scraping — Yu's API key never leaves his machine.",
-      "source": "plugin",
-      "updatedAt": "2026-05-15T08:21:50.480042Z",
-      "backingPluginId": "plugin_01Bk2J6WgE8aGdmseaqhBYYy"
-    },
-    {
-      "skillId": "skill_01Kpm7gpVGacuLU2f1e6kEeu",
-      "name": "yu-portfolio-analyzer",
-      "description": "Full portfolio analysis for Yu's multi-currency tracker (IDR/SGD/USD). Reads Tracker.xlsx with 13-sheet schema (Dashboard, Overview, SGYahoo, SGLongbridge, SGStockEvent, IDR-Mutual, IDR-Stock, US Moomoo, US Longbridge, US Webull, SnapshotLog, Snapshots), pulls live prices (FMP MCP + Yahoo fallback + Bareksa), computes returns/risk/drift, runs macro + micro research with equity-research sub-skills + Aschenbrenner trendline lens + Kevin Xu geopolitics lens, checks IPS compliance, tracks $1M milestone, generates currency-isolated rebalancing as Markdown. Trigger when Yu uploads a Tracker or asks to: analyze portfolio, check positions, rebalance, review investments, reconcile funds, check returns/risk, screen new ideas, or mentions Makmur/Maribank/LongBridge/moomoo/Webull/Stockbit/Bibit/Endowus/GXS/OCBC or the $1M goal.",
-      "source": "plugin",
-      "updatedAt": "2026-05-15T06:21:16.379212Z",
-      "backingPluginId": "plugin_01QnM8Zb5VhBZNkkEo9xCRNn"
-    },
-    {
-      "skillId": "skill_01CB8t9DsVSASRHpcQ1LqHAV",
-      "name": "pre-pop-scanner",
-      "description": "Weekly scan to find small-cap stocks with elevated odds of a 15%+ pop in the next 3-6 weeks. Triggers on phrases like \"pre-pop scan\", \"scan for poppers\", \"find the next VELO\", \"pop candidates\", \"swing watchlist\", \"weekly screener\". Output is a ranked watchlist (top 10-15) with reasons, expected catalyst date, stop, and target. Designed for Yu — small position sizing, hard stops, swing horizon (not scalping).",
-      "source": "plugin",
-      "updatedAt": "2026-05-13T09:48:54.908992Z",
-      "backingPluginId": "plugin_016SDUZsJBTdoW4rBRomMSzo"
-    },
-    {
-      "skillId": "skill_014qaZ8UXfurNM8r8azdt4gK",
-      "name": "skill-iterator",
-      "description": "Critique any existing skill by fanning out N parallel reviewer agents, each with a distinct lens and fresh context. Returns a ranked, deduplicated improvement list with severity. Triggers on phrases like \"review this skill\", \"iterate on the skill\", \"critique this skill\", \"find improvements in skill\", \"stress test the skill\", \"harden this skill\", \"skill audit\", \"skill review pass\". Designed for skill authors who want adversarial review without anchoring bias.",
-      "source": "plugin",
-      "updatedAt": "2026-05-13T09:09:56.085787Z",
-      "backingPluginId": "plugin_01YKACxKGCwc5Znf7GoER9rm"
-    },
-    {
-      "skillId": "skill_014CginFM2dvfhHyAb27NpUN",
-      "name": "saturday-action",
-      "description": "Yu's weekly Saturday portfolio review routine — 30-minute structured check covering macro tape, portfolio drift, calendar look-ahead, decision queue, and logging. Use whenever Yu says \"saturday review\", \"weekly review\", \"weekly check\", \"saturday action\", \"what's the next action this week\", \"weekly routine\", or asks for the periodic portfolio status update. Outputs a Markdown checklist with current readings against IPS triggers, the next-week action queue, and a one-line log entry. Always runs against the live tracker (refresh first via yu-portfolio-analyzer or Google Sheet sync). Monthly extension fires on the last Saturday of the month with extra reconciliation tasks. Aligned with Yu's phased IPS (Phase 1 wedding-prep through Jan 2027, Phase 2 wife-arriving, Phase 3 steady-state).",
-      "source": "plugin",
-      "updatedAt": "2026-05-09T10:02:28.604631Z",
-      "backingPluginId": "plugin_01JaCrgwAnkoudNkB15ezeCQ"
-    },
-    {
-      "skillId": "skill_01BoaGKucVrsnEUReijUK7sW",
-      "name": "flutter-rad-widget-builder",
-      "description": "Generate Flutter widgets following RAD (Reinaldo App Development) standards. Use when creating new StatefulWidgets with RAD prefix, mixins, mode-based layouts, and standardized parameter patterns. Triggers on requests like \"create a RAD widget\", \"build a new input field\", \"generate a dropdown widget\", or any Flutter widget creation for the flutter_rad project.",
-      "source": "plugin",
-      "updatedAt": "2026-01-22T02:47:14.726484Z",
-      "backingPluginId": "plugin_011dadsiHX6d1vSxt7ELD9pY"
-    },
     {
       "skillId": "docs",
       "name": "docs",
@@ -76,13 +16,6 @@
       "updatedAt": "2026-10-08T17:34:24.164396Z"
     },
     {
-      "skillId": "chrome-browser",
-      "name": "chrome-browser",
-      "description": "Read this skill before the first step that uses Claude in Chrome, the browser extension whose tools are named mcp__claude-in-chrome__* (also called Chrome, the browser extension, or the external browser) and which acts in the person's real Chrome with their own sign-ins; before those tools are turned on there may be a single enable__mcp__claude-in-chrome tool instead. It covers loading the tools in one ToolSearch call, checking the person's open tabs and working in a new tab, site permissions, GIF recordings, console logs, dialogs to avoid, and when to stop and ask. It is not for the built-in browser (mcp__Claude_Browser__* or mcp__remote-devices__Claude_Browser__* tools), which has its own skill, and it does not decide which browser to use.",
-      "source": "anthropic-example",
-      "updatedAt": "2026-09-18T21:09:50.227858Z"
-    },
-    {
       "skillId": "built-in-browser",
       "name": "built-in-browser",
       "description": "Read this skill before the first step that uses the built-in browser, the browser pane inside the Claude desktop app (also called the in-app browser, the browser pane, Claude's browser, or \"your own browser\"), whose tools are named mcp__Claude_Browser__* when the session runs in the desktop app and mcp__remote-devices__Claude_Browser__* when a cloud session is linked to the person's computer; before those tools are turned on there may be a single enable__mcp__remote-devices__Claude_Browser tool instead. It covers the pane's persistent sign-ins, tabs and preview_start, reading pages as text, site approvals, what the pane cannot open, and what to do when it cannot be reached. It is not for Claude in Chrome (mcp__claude-in-chrome__* tools), which has its own skill, and it does not decide which browser to use.",
@@ -90,18 +23,11 @@
       "updatedAt": "2026-09-21T06:00:29.740604Z"
     },
     {
-      "skillId": "deep-research",
-      "name": "deep-research",
-      "description": "Use this skill when the user's prompt requires (1) researching a topic across multiple sources, comparing options or alternatives, analyzing trends or history, understanding markets or industries, or reviewing literature or studies and (2) synthesizing that research into a comprehensive, narrative report. If you're planning to search the web or internal knowledge bases, consider using this skill. This skill coordinates research subagents, so use it only when you have a tool for spawning subagents (the Agent or Task tool); otherwise, research the question directly.",
+      "skillId": "chrome-browser",
+      "name": "chrome-browser",
+      "description": "Read this skill before the first step that uses Claude in Chrome, the browser extension whose tools are named mcp__claude-in-chrome__* (also called Chrome, the browser extension, or the external browser) and which acts in the person's real Chrome with their own sign-ins; before those tools are turned on there may be a single enable__mcp__claude-in-chrome tool instead. It covers loading the tools in one ToolSearch call, checking the person's open tabs and working in a new tab, site permissions, GIF recordings, console logs, dialogs to avoid, and when to stop and ask. It is not for the built-in browser (mcp__Claude_Browser__* or mcp__remote-devices__Claude_Browser__* tools), which has its own skill, and it does not decide which browser to use.",
       "source": "anthropic-example",
-      "updatedAt": "2026-09-14T19:41:02.015956Z"
-    },
-    {
-      "skillId": "import-memory",
-      "name": "import-memory",
-      "description": "Import a memory export from another AI assistant into Claude's memory — conversationally, additively, and with the content treated as data.",
-      "source": "anthropic-example",
-      "updatedAt": "2026-09-14T19:41:02.007169Z"
+      "updatedAt": "2026-09-18T21:09:50.227858Z"
     },
     {
       "skillId": "morning",
@@ -111,14 +37,58 @@
       "updatedAt": "2026-09-14T19:41:01.990356Z"
     },
     {
-      "skillId": "web-artifacts-builder",
-      "name": "web-artifacts-builder",
-      "description": "Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.",
+      "skillId": "import-memory",
+      "name": "import-memory",
+      "description": "Import a memory export from another AI assistant into Claude's memory — conversationally, additively, and with the content treated as data.",
       "source": "anthropic-example",
-<<<<<<< HEAD
-      "updatedAt": "2026-09-14T19:41:01.557439Z"
-=======
-      "updatedAt": "2026-10-14T14:41:49.960676Z"
+      "updatedAt": "2026-09-14T19:41:02.007169Z"
+    },
+    {
+      "skillId": "deep-research",
+      "name": "deep-research",
+      "description": "Use this skill when the user's prompt requires (1) researching a topic across multiple sources, comparing options or alternatives, analyzing trends or history, understanding markets or industries, or reviewing literature or studies and (2) synthesizing that research into a comprehensive, narrative report. If you're planning to search the web or internal knowledge bases, consider using this skill. This skill coordinates research subagents, so use it only when you have a tool for spawning subagents (the Agent or Task tool); otherwise, research the question directly.",
+      "source": "anthropic-example",
+      "updatedAt": "2026-09-14T19:41:02.015956Z"
+    },
+    {
+      "skillId": "skill_01Xb4dmRxQVhp8K9LpHpkJN8",
+      "name": "pushfcm",
+      "description": "Send a push notification through the CloudPush worker's FCM endpoint (POST /push-fcm), and resolve which fcm-topic to use before sending. Use this whenever Yu wants to send an FCM/push notification, wire up \"PushFCM\", set up or configure CloudPush FCM, migrate an ntfy push to FCM, or asks to \"notify me / push this / send an alert\" via the CloudPush worker. Trigger even when Yu says \"push this to my phone\" or names an existing ntfy topic and wants it delivered over FCM instead. Always resolve the topic (ask or reuse) before the first send in a session.",
+      "source": "plugin",
+      "updatedAt": "2026-08-20T05:53:57.991333Z",
+      "backingPluginId": "plugin_01AXjZsDxgyyRfeGtRn5YLWm"
+    },
+    {
+      "skillId": "skill_014qaZ8UXfurNM8r8azdt4gK",
+      "name": "skill-iterator",
+      "description": "Critique any existing skill by fanning out N parallel reviewer agents, each with a distinct lens and fresh context. Returns a ranked, deduplicated improvement list with severity. Triggers on phrases like \"review this skill\", \"iterate on the skill\", \"critique this skill\", \"find improvements in skill\", \"stress test the skill\", \"harden this skill\", \"skill audit\", \"skill review pass\". Designed for skill authors who want adversarial review without anchoring bias.",
+      "source": "plugin",
+      "updatedAt": "2026-05-13T09:09:56.085787Z",
+      "backingPluginId": "plugin_01YKACxKGCwc5Znf7GoER9rm"
+    },
+    {
+      "skillId": "skill_01BoaGKucVrsnEUReijUK7sW",
+      "name": "flutter-rad-widget-builder",
+      "description": "Generate Flutter widgets following RAD (Reinaldo App Development) standards. Use when creating new StatefulWidgets with RAD prefix, mixins, mode-based layouts, and standardized parameter patterns. Triggers on requests like \"create a RAD widget\", \"build a new input field\", \"generate a dropdown widget\", or any Flutter widget creation for the flutter_rad project.",
+      "source": "plugin",
+      "updatedAt": "2026-01-22T02:47:14.726484Z",
+      "backingPluginId": "plugin_011dadsiHX6d1vSxt7ELD9pY"
+    },
+    {
+      "skillId": "skill_014CginFM2dvfhHyAb27NpUN",
+      "name": "saturday-action",
+      "description": "Yu's weekly Saturday portfolio review routine — 30-minute structured check covering macro tape, portfolio drift, calendar look-ahead, decision queue, and logging. Use whenever Yu says \"saturday review\", \"weekly review\", \"weekly check\", \"saturday action\", \"what's the next action this week\", \"weekly routine\", or asks for the periodic portfolio status update. Outputs a Markdown checklist with current readings against IPS triggers, the next-week action queue, and a one-line log entry. Always runs against the live tracker (refresh first via yu-portfolio-analyzer or Google Sheet sync). Monthly extension fires on the last Saturday of the month with extra reconciliation tasks. Aligned with Yu's phased IPS (Phase 1 wedding-prep through Jan 2027, Phase 2 wife-arriving, Phase 3 steady-state).",
+      "source": "plugin",
+      "updatedAt": "2026-05-09T10:02:28.604631Z",
+      "backingPluginId": "plugin_01JaCrgwAnkoudNkB15ezeCQ"
+    },
+    {
+      "skillId": "skill_01CB8t9DsVSASRHpcQ1LqHAV",
+      "name": "pre-pop-scanner",
+      "description": "Weekly scan to find small-cap stocks with elevated odds of a 15%+ pop in the next 3-6 weeks. Triggers on phrases like \"pre-pop scan\", \"scan for poppers\", \"find the next VELO\", \"pop candidates\", \"swing watchlist\", \"weekly screener\". Output is a ranked watchlist (top 10-15) with reasons, expected catalyst date, stop, and target. Designed for Yu — small position sizing, hard stops, swing horizon (not scalping).",
+      "source": "plugin",
+      "updatedAt": "2026-05-13T09:48:54.908992Z",
+      "backingPluginId": "plugin_016SDUZsJBTdoW4rBRomMSzo"
     },
     {
       "skillId": "skill_01TGi27Q31WWvEoSVDx5sXGs",
@@ -127,7 +97,35 @@
       "source": "plugin",
       "updatedAt": "2026-05-15T08:21:50.480042Z",
       "backingPluginId": "plugin_01Bk2J6WgE8aGdmseaqhBYYy"
->>>>>>> 1efaeb5 (chore: auto-sync 22 claude config file(s))
+    },
+    {
+      "skillId": "google-workspace",
+      "name": "google-workspace",
+      "description": "Read this before the first Google Drive, Docs, Sheets or Slides connector call whenever the task creates or changes a Google file. Use this skill whenever the user wants to create or change a Google Doc, Sheet or Slides file in their Google Drive. Triggers include: a request that names Google Docs, Sheets, Slides or Drive and asks to make, edit, format, copy or rename a file; a docs.google.com link with a request to change that file, even a one-line fix or suggested edits; and any follow-up change to a Google file from earlier in the chat, even \"change it\" or \"add a tab\". Includes helper scripts for document positions, cell ranges and slide layout. However, if the user asks for a doc, deck or spreadsheet without naming Google, or gives a Google file only as source material for something new, use Claude's own output type instead. Do NOT use for read-only questions about a Google file, or for Word, Excel, PowerPoint or PDF files.",
+      "source": "anthropic-example",
+      "updatedAt": "2026-10-14T14:41:49.960676Z"
+    },
+    {
+      "skillId": "web-artifacts-builder",
+      "name": "web-artifacts-builder",
+      "description": "Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.",
+      "source": "anthropic-example",
+      "updatedAt": "2026-09-14T19:41:01.557439Z"
+    },
+    {
+      "skillId": "skill_01Kpm7gpVGacuLU2f1e6kEeu",
+      "name": "yu-portfolio-analyzer",
+      "description": "Full portfolio analysis for Yu's multi-currency tracker (IDR/SGD/USD). Reads Tracker.xlsx with 13-sheet schema (Dashboard, Overview, SGYahoo, SGLongbridge, SGStockEvent, IDR-Mutual, IDR-Stock, US Moomoo, US Longbridge, US Webull, SnapshotLog, Snapshots), pulls live prices (FMP MCP + Yahoo fallback + Bareksa), computes returns/risk/drift, runs macro + micro research with equity-research sub-skills + Aschenbrenner trendline lens + Kevin Xu geopolitics lens, checks IPS compliance, tracks $1M milestone, generates currency-isolated rebalancing as Markdown. Trigger when Yu uploads a Tracker or asks to: analyze portfolio, check positions, rebalance, review investments, reconcile funds, check returns/risk, screen new ideas, or mentions Makmur/Maribank/LongBridge/moomoo/Webull/Stockbit/Bibit/Endowus/GXS/OCBC or the $1M goal.",
+      "source": "plugin",
+      "updatedAt": "2026-05-15T06:21:16.379212Z",
+      "backingPluginId": "plugin_01QnM8Zb5VhBZNkkEo9xCRNn"
+    },
+    {
+      "skillId": "pdf",
+      "name": "pdf",
+      "description": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.",
+      "source": "anthropic",
+      "updatedAt": "2026-07-10T19:23:15.432550Z"
     },
     {
       "skillId": "skill-creator",
@@ -137,11 +135,11 @@
       "updatedAt": "2026-10-21T20:47:56.610025Z"
     },
     {
-      "skillId": "canvas-design",
-      "name": "canvas-design",
-      "description": "Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, design, or other static piece. Create original visual designs, never copying existing artists' work to avoid copyright violations.",
-      "source": "anthropic-example",
-      "updatedAt": "2026-09-14T19:41:01.576619Z"
+      "skillId": "docx",
+      "name": "docx",
+      "description": "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx) or Word templates (.dotx). Triggers include: any mention of Microsoft Word Documents, such as 'Word doc', 'word document', '.docx', '.dotx', 'microsoft doc'. Also use when extracting or reorganizing content from .docx or .dotx files, inserting or replacing images in documents, find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a deliverable as a Word or .docx file (to download, email or print), use this skill. However, if they ask for a document, page, report, memo, or notes WITHOUT naming a file format and the session offers Claude's own dedicated document or page skill or connector, use that instead, even if they will email or print it. Do NOT use for PDFs, spreadsheets, Google Docs, or coding unrelated to document generation.",
+      "source": "anthropic",
+      "updatedAt": "2026-09-30T02:00:31.677168Z"
     },
     {
       "skillId": "xlsx",
@@ -158,31 +156,11 @@
       "updatedAt": "2026-10-02T22:00:34.625666Z"
     },
     {
-      "skillId": "pdf",
-      "name": "pdf",
-      "description": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.",
-      "source": "anthropic",
-      "updatedAt": "2026-07-10T19:23:15.432550Z"
-    },
-    {
-      "skillId": "docx",
-      "name": "docx",
-      "description": "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx) or Word templates (.dotx). Triggers include: any mention of Microsoft Word Documents, such as 'Word doc', 'word document', '.docx', '.dotx', 'microsoft doc'. Also use when extracting or reorganizing content from .docx or .dotx files, inserting or replacing images in documents, find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a deliverable as a Word or .docx file (to download, email or print), use this skill. However, if they ask for a document, page, report, memo, or notes WITHOUT naming a file format and the session offers Claude's own dedicated document or page skill or connector, use that instead, even if they will email or print it. Do NOT use for PDFs, spreadsheets, Google Docs, or coding unrelated to document generation.",
-      "source": "anthropic",
-      "updatedAt": "2026-09-30T02:00:31.677168Z"
-    },
-    {
-      "skillId": "google-workspace",
-      "name": "google-workspace",
-      "description": "Read this before the first Google Drive, Docs, Sheets or Slides connector call whenever the task creates or changes a Google file. Use this skill whenever the user wants to create or change a Google Doc, Sheet or Slides file in their Google Drive. Triggers include: a request that names Google Docs, Sheets, Slides or Drive and asks to make, edit, format, copy or rename a file; a docs.google.com link with a request to change that file, even a one-line fix or suggested edits; and any follow-up change to a Google file from earlier in the chat, even \"change it\" or \"add a tab\". Includes helper scripts for document positions, cell ranges and slide layout. However, if the user asks for a doc, deck or spreadsheet without naming Google, or gives a Google file only as source material for something new, use Claude's own output type instead. Do NOT use for read-only questions about a Google file, or for Word, Excel, PowerPoint or PDF files.",
+      "skillId": "canvas-design",
+      "name": "canvas-design",
+      "description": "Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, design, or other static piece. Create original visual designs, never copying existing artists' work to avoid copyright violations.",
       "source": "anthropic-example",
-      "updatedAt": "2026-10-14T14:41:49.960676Z"
+      "updatedAt": "2026-09-14T19:41:01.576619Z"
     }
-  ],
-  "pendingClaims": [
-    "27500:134370208395762521/skill-creator",
-    "26888:134370208387155484/skill-creator",
-    "25640:134370208359245125/skill-creator",
-    "27292:134370208406814159/skill-creator"
   ]
 }
