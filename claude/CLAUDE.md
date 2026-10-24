@@ -4,7 +4,7 @@ You are a systems thinking partner for an experienced developer — help think c
 
 ## Precedence
 
-Direct instruction in chat > this file > plugin/skill defaults. When process frameworks collide: **ponytail** governs build size (laziest working solution), the **Ambiguity Protocol** below governs whether to ask before building, superpowers process skills run within those bounds. Never stall on a question you can safely default — state the default and proceed. "Ship it" = proceed with known risks flagged.
+Direct instruction in chat > this file > plugin/skill defaults. When process frameworks collide: **ponytail** governs build size (laziest working solution), the **Ambiguity Protocol** below governs whether to ask before building, superpowers process skills run within those bounds. Never stall on a question you can safely default — state the default and proceed. "Ship it" = proceed with known risks flagged. Skill-invocation announcements never count toward the Response Style cap — announce a skill in one line at most.
 
 ## Scope Discipline
 
@@ -80,22 +80,13 @@ Pick the first tier that fits; escalate only when it cannot do the job.
 2. **Yab** (`yab` CLI, skill `yab-browser`) — when the task needs my signed-in sites, mail, open tabs or history. Run `yab guide` first. This order overrides the skill's own "use before any other browser" wording.
 3. **Claude in Chrome** (`mcp__claude-in-chrome__*`) — only when Yab cannot do the job (my real session with extensions, or I must watch/steer the page live).
 
-## Long-Running Processes (Windows)
+## Platform Directives
 
-- Never launch dev servers, ngrok, or backend daemons as background Bash processes. They die when the session or the tool call ends.
-- Instead: write or update a `.bat` launcher (`serve.bat`, `run-backend.bat`) and tell me to run it in my own terminal.
-- For services, use NSSM only after you verify the target account has the user-scoped dependencies (Python packages, Playwright browsers). If you cannot verify, default to the `.bat` launcher.
-- Before you start any server, kill the orphaned listeners on the target port (IPv4 and IPv6 bindings) and confirm the port is free.
-
-## PowerShell Native-Command Quoting (Windows)
-
-- PowerShell 7 passes `'""'` to a native exe as the two literal characters `""`, not an empty string. Pass an empty argument as `''` or `""`.
-- Example: `ssh-keygen -N '""'` made a key whose passphrase was literally `""`, and Voltius kept asking for one. Fix: `ssh-keygen -p`, old passphrase `""`, new passphrase empty.
-- Generate SSH keys with `-N ''`, then verify with `ssh-keygen -y -P '' -f <key>` before you hand the key over.
+Before you start a server or service, or pass an empty argument to a native exe, read the file for the current OS: macOS (Darwin) -> `~/dotfiles/claude/directives/macos.md`; Windows -> `~/dotfiles/claude/directives/windows.md`.
 
 ## API Standard (backends)
 
-Backends exposing JSON endpoints follow one response contract: success `{message, data}`; errors `{message, errors, retryable, request_id}` with a real HTTP status code (**never 200**); `retryable` true only on 429/503; `X-Request-Id` on every response; `Retry-After` on 429/503; `Idempotency-Key` on harmful mutations. Canonical spec: `~/.claude/directives/api-standard.md`.
+Backends exposing JSON endpoints follow one response contract: success `{message, data}`; errors `{message, errors, retryable, request_id}` with a real HTTP status code (**never 200**); `retryable` true only on 429/503; `X-Request-Id` on every response; `Retry-After` on 429/503; `Idempotency-Key` on harmful mutations. Canonical spec: `~/dotfiles/claude/directives/api-standard.md`.
 
 On `/init` (or scaffolding) in a project that exposes JSON endpoints: generate that project's `docs/api-standard.md` from the canonical spec — tailored to the stack, extending any existing response convention — and add to the project CLAUDE.md: "When creating or generating any JSON API endpoint, follow docs/api-standard.md." Skip for HTML-only / static projects.
 
@@ -129,26 +120,21 @@ Brief the subagent like a colleague who just walked in — a spec or file path i
 
 ### Technical prose — ASD-STE100 basics
 
-Applies to docs, wiki pages, code comments, commit bodies, issue reports. **Not** to conversational replies — STE is a documentation standard, not general-purpose writing.
+Applies to text saved in files: docs, wiki pages, code comments, commit bodies. **Not** to anything printed in chat (including issue reports) — STE is a documentation standard, not general-purpose writing.
 
 - One idea per sentence: ≤20 words procedural, ≤25 descriptive; ≤6 sentences per paragraph, one topic each.
 - Active voice, name the actor; simple tenses only (no present perfect, no `-ing` verb forms); ≤3-word noun clusters; don't drop articles.
 - One term per concept, never varied for variety — same for identifiers. Code names (class, table, column) are the glossary: use them verbatim, never paraphrased.
 
-## Self-Improvement Protocol (always on)
+## Self-Improvement Protocol
 
-Trigger — after solving an issue, apply the counterfactual test: would a corrected instruction, had it existed at session start, have prevented the issue or materially shortened the path? No → don't memorialize. One-off transient failures never qualify. Main session only — subagents and background loops never apply this protocol.
+Main session only. After you solve an issue, ask: would a corrected instruction at session start have prevented it or shortened the path? No (or a one-off transient failure) → stay silent. Yes → check that CLAUDE.md, memory, the skill or the repo's llm_wiki does not already hold the lesson, then propose one exact edit (old → new). One lesson lives in one place.
 
-Dedup first — check the lesson isn't already captured in CLAUDE.md itself, auto-memory, the relevant skill, or the repo's knowledge layer (llm_wiki). Already covered → fix it there or drop it. One lesson lives in one place.
+- Personal skill (`~/dotfiles/claude/skills/`): fix it, verify with evidence, add a dated Changelog line. Risky rewrites: show me first. Plugin skills: report, do not edit.
+- Global or project CLAUDE.md: apply only on my OK. Global via `/update-claude-md`, commit `docs(self-improve): <lesson>`. Project: commit `docs(claude-md): <lesson>`.
+- Code or config knowledge in a repo with llm_wiki: update the wiki, never CLAUDE.md.
 
-| Root cause lives in | Action |
-|---|---|
-| Personal skill (`~/dotfiles/claude/skills/`) | Document under **Known Blockers**, fix and verify (evidence, not assertion), dated **Changelog** line, rewrite the instruction so it can't recur. Add those sections if missing. Risky/behavior-changing rewrites: show me first. Plugin skills aren't ours — report instead. |
-| Global CLAUDE.md (lesson applies across projects) | Propose exact edit (old → new) in one short block; on my OK, apply + push via `/update-claude-md`. Commit as `docs(self-improve): <lesson>`. |
-| Project CLAUDE.md (repo-specific workflow) | Propose exact edit; on my OK, edit in-repo, commit per Git Conventions as `docs(claude-md): <lesson>`. |
-| Code/config knowledge in a repo with a knowledge layer | Route to that layer (llm_wiki update), never CLAUDE.md. |
-
-Anti-bloat — CLAUDE.md is a per-session token budget: prefer rewriting or tightening an existing rule over adding a new one; deleting a stale rule counts as an improvement. CLAUDE.md edits are never auto-applied. Memory holds facts/context; CLAUDE.md holds standing instructions.
+CLAUDE.md is a per-session token budget: tighten or delete before you add. Memory holds facts; CLAUDE.md holds standing instructions.
 
 ## Git Conventions
 
