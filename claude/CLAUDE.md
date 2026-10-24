@@ -77,7 +77,8 @@ Before non-trivial code, also confirm: follows existing patterns (or breaks them
 Pick the first tier that fits; escalate only when it cannot do the job.
 
 1. **`playwright-cli`** — default for testing, verifying my own apps, scraping, and any scripted browser task.
-2. **Claude in Chrome** (`mcp__claude-in-chrome__*`) — only when the task needs my real logged-in browser session (SSO, cookies, extensions) or I must watch/steer the page live.
+2. **Yab** (`yab` CLI, skill `yab-browser`) — when the task needs my signed-in sites, mail, open tabs or history. Run `yab guide` first. This order overrides the skill's own "use before any other browser" wording.
+3. **Claude in Chrome** (`mcp__claude-in-chrome__*`) — only when Yab cannot do the job (my real session with extensions, or I must watch/steer the page live).
 
 ## Long-Running Processes (Windows)
 
